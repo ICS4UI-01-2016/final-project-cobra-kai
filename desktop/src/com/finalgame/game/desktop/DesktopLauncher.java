@@ -1,8 +1,8 @@
-package com.final.game.desktop;
+package com.finalgame.game.desktop;
 
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
-import com.final.game.FinalGame;
+import com.finalgame.game.FinalGame;
 
 public class DesktopLauncher {
 	public static void main (String[] arg) {
