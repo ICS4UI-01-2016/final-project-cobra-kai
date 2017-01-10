@@ -20,11 +20,11 @@ public class FinalGame extends ApplicationAdapter {
 	@Override
 	public void create () {
         batch = new SpriteBatch();
-        Gdx.gl.glClearColor(1, 0, 0, 1); // colour to clear the screen with
+        Gdx.gl.glClearColor(1, 0, 0, 1); 
         
         stateManager = new StateManager();
         MenuState firstScreen = new MenuState(stateManager);
-        stateManager.push(firstScreen); // load the first screen
+        stateManager.push(firstScreen); 
     }
 
         // Game loop
