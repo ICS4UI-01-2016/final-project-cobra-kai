@@ -1,5 +1,7 @@
 package com.finalgame.game;
 
+import States.MenuState;
+import States.State;
 import States.StateManager;
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
@@ -17,17 +19,25 @@ public class FinalGame extends ApplicationAdapter {
 	// Initial setup
 	@Override
 	public void create () {
-		batch = new SpriteBatch();
-	}
+        batch = new SpriteBatch();
+        Gdx.gl.glClearColor(1, 0, 0, 1); // colour to clear the screen with
+        
+        stateManager = new StateManager();
+        MenuState firstScreen = new MenuState(stateManager);
+        stateManager.push(firstScreen); // load the first screen
+    }
 
         // Game loop
 	@Override
 	public void render () {
-		Gdx.gl.glClearColor(1, 0, 0, 1);
-		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-		batch.begin();
-		batch.end();
-	}
+        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+        // handle input
+        stateManager.handleInput();
+        // update the game states
+        stateManager.update(Gdx.graphics.getDeltaTime());
+        // draw the screen
+        stateManager.render(batch);
+    }
 	
         // End section
 	@Override
