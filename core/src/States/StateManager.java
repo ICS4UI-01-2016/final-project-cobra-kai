@@ -43,5 +43,9 @@ public class StateManager {
     public void handleInput() {
         states.peek().handleInput();
     }
+
+    public void push(MenuState firstScreen) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
 }

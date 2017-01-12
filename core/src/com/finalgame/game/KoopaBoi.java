@@ -19,7 +19,7 @@ public class KoopaBoi {
     private Vector3 velocity;
     
     
-    private final float GRAVITY = 15;
+    private final float GRAVITY = -12;
     private final float MOVEMENT = 100;
     
     public KoopaBoi(int x, int y){
