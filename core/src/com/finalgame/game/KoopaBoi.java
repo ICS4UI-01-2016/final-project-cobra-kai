@@ -39,11 +39,27 @@ public class KoopaBoi {
         velocity.y = 0;
     }
     
+    public void update(float deltaTime){
+        // add gravity
+        velocity.y += GRAVITY;
+        // scaling velocity by time
+        velocity.scl(deltaTime);
+        // adding velocity to position
+        position.add(velocity);
+        // unscale velocity
+        velocity.scl(1/deltaTime);
+        
+        // set the new bounds
+        hitBox.setPosition(position.x, position.y);
+    }
+    
     public void render(SpriteBatch batch){
         batch.draw(start, position.x, position.y);
     }
     
-      
+    public void dispose(){
+        start.dispose();
+    }  
     }
     
     
