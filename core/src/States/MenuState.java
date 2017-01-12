@@ -4,22 +4,78 @@
  */
 package States;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Preferences;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.Vector3;
+import com.finalgame.game.FinalGame;
 
 /**
  *
- * @author sevcm7279
+ * @author coulh9904
  */
-public class MenuState {
+public class MenuState extends State {
 
-    private Texture bg;
-    private Texture button;
+    private Texture BG;
+    private Texture Button;
+    private int HighScore;
+    private BitmapFont Font;
 
     public MenuState(StateManager gsm) {
         super(gsm);
-        bg = new Texture("bg.png");
-        button = new Texture("playbtn.png");
-        setCameraView(FlappyBird.WIDTH, FlappyBird.HEIGHT);
+        BG = new Texture("bg.png");
+        Button = new Texture("playbtn.png");
+        setCameraView(FinalGame.WIDTH, FinalGame.HEIGHT);
         setCameraPosition(getViewWidth() / 2, getViewHeight() / 2);
+        
+        Preferences Pref = Gdx.app.getPreferences("HighScore");
+        HighScore = Pref.getInteger("HighScore", 0);
+        Font = new BitmapFont(); //default Arial 15pt font
+    }
+
+    @Override
+    public void render(SpriteBatch batch) {
+        batch.setProjectionMatrix(getCombinedCamera());
+        batch.begin();
+        batch.draw(BG, 0, 0, getViewWidth(), getViewHeight());
+        Font.draw(batch, " " + HighScore, getViewWidth()/2, getViewHeight() - 100);
+        batch.draw(Button, getViewWidth() / 2 - Button.getWidth() / 2, getViewHeight() / 2);
+        batch.end();
+
+    }
+    public void updateScore(){
+        Preferences Pref = Gdx.app.getPreferences("HighScore");
+        HighScore = Pref.getInteger("HighScore", 0);
+    }
+
+    @Override
+    public void update(float deltaTime) {
+    }
+
+    @Override
+    public void handleInput() {
+        if (Gdx.input.justTouched()) {
+            //get mouse click/touch position
+            Vector3 touch = new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0);
+            //Convert that point to game coords
+            unproject(touch);
+            //check if button is pressed
+            float buttonX = getViewWidth() / 2 - Button.getWidth() / 2;
+            float buttonY = getViewHeight() / 2;
+            if(touch.x > buttonX && touch.x < buttonX + Button.getWidth()
+                    && touch.y > buttonY && touch.y < buttonY + Button.getHeight()){
+                StateManager GSM = getStateManager();
+                GSM.push(new PlayState(GSM));
+            }
+        }
+    }
+
+    @Override
+    public void dispose() {
+        BG.dispose();
+        Button.dispose();
     }
 }
+

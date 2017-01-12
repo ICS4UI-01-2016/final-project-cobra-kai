@@ -49,8 +49,8 @@ public abstract class State {
         return cam.combined;
     }
     
-    public void moveCameraX(float x){
-        cam.position.x = x;
+    public void moveCameraY(float y){
+        cam.position.y = y;
         cam.update();
     }
     
