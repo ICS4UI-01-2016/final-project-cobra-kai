@@ -5,24 +5,25 @@
  */
     package States;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Preferences;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.finalgame.game.KoopaBoi;
 import com.finalgame.game.FinalGame;
+
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.finalgame.game.Clouds;
-import java.awt.Font;
+import com.finalgame.game.KoopaBoi;
 
 /**
  *
  * @author lamon
  */
+
 public class PlayState extends State {
 
     private KoopaBoi Koopa;
-    private Clouds[] Clouds;
+    private Clouds[] Cloud;
     private Texture bg;
     private int Score;
     private BitmapFont font;
@@ -32,15 +33,15 @@ public class PlayState extends State {
     public PlayState(StateManager sm) {
         super(sm);
         //Replace Flappybird w/ FinalGame - to match our states
-        setCameraView(FinalGame.WIDTH / 2, FinalGame.HEIGHT / 2);
+        setCameraView(FinalGame.WIDTH / 2, FinalGame.LENGTH / 2);
         //setCameraPosition(FlappyBird.WIDTH/2, FlappyBird.HEIGHT/2);
-        bird = new Bird(50, 200);
+        Koopa = new KoopaBoi(50, 200);
         bg = new Texture("bg.png");
-        moveCameraX(bird.getX() + CAM_X_OFFSET);
+        moveCameraX(Koopa.getX() + CAM_X_OFFSET);
 
-        pipes = new Pipe[3];
-        for (int i = 0; i < pipes.length; i++) {
-            pipes[i] = new Pipe(200 + PIPE_GAP_AMOUNT * Pipe.WIDTH * i);
+        Cloud = new Clouds[3];
+        for (int i = 0; i < Cloud.length; i++) {
+            Cloud[i] = new Clouds(200 + PIPE_GAP_AMOUNT * Clouds.WIDTH * i);
         }
         Score = 0;
         font = new BitmapFont();
@@ -58,10 +59,10 @@ public class PlayState extends State {
         batch.draw(bg, getCameraX() - getViewWidth() / 2, getCameraY() - getViewHeight() / 2);
         font.draw(batch, " " + Score, getCameraX(), getCameraY() + 190);
         // draw the bird
-        bird.render(batch);
+        Koopa.render(batch);
         //draw pipes
-        for (int i = 0; i < pipes.length; i++) {
-            pipes[i].render(batch);
+        for (int i = 0; i < Cloud.length; i++) {
+            Cloud[i].render(batch);
         }
         // end the stuff to draw
         batch.end();
@@ -70,15 +71,15 @@ public class PlayState extends State {
     @Override
     public void update(float deltaTime) {
         // update any game models
-        bird.update(deltaTime);
+        Koopa.update(deltaTime);
 
-        moveCameraX(bird.getX() + CAM_X_OFFSET);
+        moveCameraX(Koopa.getX() + CAM_X_OFFSET);
 
 
 
         //did the bird hit the pipe?
-        for (int i = 0; i < pipes.length; i++) {
-            if (pipes[i].collides(bird)) {
+        for (int i = 0; i < Cloud.length; i++) {
+            if (Cloud[i].collides(Koopa)) {
                 //end the game
                 StateManager GSM = getStateManager();
                 //pop off 
@@ -92,19 +93,19 @@ public class PlayState extends State {
                     //save it
                     Pref.flush();
                 }
-            } else if (!pipes[i].hasPassed()
-                    && bird.getX() > pipes[i].getX() + Pipe.WIDTH) {
+            } else if (!Cloud[i].hasPassed()
+                    && Koopa.getX() > Cloud[i].getX() + Clouds.WIDTH) {
                 Score++;
-                pipes[i].pass();
+                Cloud[i].pass();
             }
 
         }
         //adjust the pipes
-        for (int i = 0; i < pipes.length; i++) {
+        for (int i = 0; i < Cloud.length; i++) {
             //HAS THE BIRD PASSED THE PIPE?
-            if (getCameraX() - FlappyBird.WIDTH / 4 > pipes[i].getX() + Pipe.WIDTH) {
-                float x = pipes[i].getX() + PIPE_GAP_AMOUNT * Pipe.WIDTH * pipes.length;
-                pipes[i].setX(x);
+            if (getCameraX() - FinalGame.WIDTH / 4 > Cloud[i].getX() + Clouds.WIDTH) {
+                float x = Cloud[i].getX() + PIPE_GAP_AMOUNT * Clouds.WIDTH * Cloud.length;
+                Cloud[i].setX(x);
             }
         }
     }
@@ -114,16 +115,18 @@ public class PlayState extends State {
         // handle any player input changes
 
         if (Gdx.input.justTouched()) {
-            bird.jump();
+            Koopa.jump();
         }
     }
 
     @Override
     public void dispose() {
         bg.dispose();
-        bird.dispose();
-        for (int i = 0; i < pipes.length; i++) {
-            pipes[i].dispose();
+        Koopa.dispose();
+        for (int i = 0; i < Cloud.length; i++) {
+            Cloud[i].dispose();
         }
     }
 }
+
+

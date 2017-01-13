@@ -24,10 +24,11 @@ public class MenuState extends State {
     private BitmapFont Font;
 
     public MenuState(StateManager gsm) {
+
         super(gsm);
         BG = new Texture("bg.png");
         Button = new Texture("playbtn.png");
-        setCameraView(FinalGame.WIDTH, FinalGame.HEIGHT);
+        setCameraView(FinalGame.WIDTH, FinalGame.LENGTH);
         setCameraPosition(getViewWidth() / 2, getViewHeight() / 2);
         
         Preferences Pref = Gdx.app.getPreferences("HighScore");
