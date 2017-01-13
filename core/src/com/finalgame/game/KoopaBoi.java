@@ -14,26 +14,31 @@ import com.badlogic.gdx.math.Vector3;
  * @author moore3607
  */
 public class KoopaBoi {
+
     private Vector3 position;
     private Vector3 velocity;
-    private Texture birdPic;
-    private Rectangle bounds;
-    
-    private final float GRAVITY = -15;
-    private final float MOVEMENT = 30;
-    
-    public KoopaBoi(int x, int y){
-        position = new Vector3(x,y,0);
-        velocity = new Vector3(MOVEMENT,0,0);
-        birdPic = new Texture("bird.png");
-        bounds  = new Rectangle(position.x, position.y, birdPic.getWidth(), birdPic.getHeight());
+    private Texture jumpRight;
+    private Texture jumpLeft;
+    private Texture fallLeft;
+    private Texture fallRight;
+    private Texture hitGround;
+    private Texture start;
+    private Rectangle hitBox;
+    private final float GRAVITY = -12;
+    private final float MOVEMENT = 0;
+
+    public KoopaBoi(int x, int y) {
+        position = new Vector3(x, y, 0);
+        velocity = new Vector3(MOVEMENT, 0, 0);
+        start = new Texture("badlogic.jpg");
+        hitBox = new Rectangle(position.x, position.y, start.getWidth(), start.getHeight());
     }
-    
-    public void jump(){
-        velocity.y = 250;
+
+    public void jump() {
+        velocity.y = 0;
     }
-    
-    public void update(float deltaTime){
+
+    public void update(float deltaTime) {
         // add gravity
         velocity.y += GRAVITY;
         // scaling velocity by time
@@ -41,24 +46,29 @@ public class KoopaBoi {
         // adding velocity to position
         position.add(velocity);
         // unscale velocity
-        velocity.scl(1/deltaTime);
-        
-        bounds.setPosition(position.x, position.y);
+        velocity.scl(1 / deltaTime);
+
+        // set the new bounds
+        hitBox.setPosition(position.x, position.y);
     }
-    
-    public void render(SpriteBatch batch){
-        batch.draw(birdPic, position.x, position.y);
+
+    public void render(SpriteBatch batch) {
+        batch.draw(start, position.x, position.y);
     }
-    
-    public float getX(){
+
+    public float getX() {
         return position.x;
     }
-    
-    public Rectangle getBounds(){
-        return bounds;
+
+    public float getY() {
+        return position.y;
     }
-    
-    public void dispose(){
-        birdPic.dispose();
+
+    public Rectangle getHitBox() {
+        return hitBox;
+    }
+
+    public void dispose() {
+        start.dispose();
     }
 }

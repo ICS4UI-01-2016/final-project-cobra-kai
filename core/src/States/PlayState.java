@@ -15,6 +15,12 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.finalgame.game.Clouds;
 import com.finalgame.game.KoopaBoi;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.finalgame.game.FinalGame;
+import com.finalgame.game.KoopaBoi;
+
 /**
  *
  * @author lamon
