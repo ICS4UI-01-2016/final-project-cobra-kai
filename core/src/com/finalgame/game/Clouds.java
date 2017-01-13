@@ -30,8 +30,7 @@ public class Clouds {
     public Clouds(float x){
         float y = (int)(Math.random()*(325-75+1) + 75);
         position = new Vector2(x,y);
-        pipeTop = new Texture("toptube.png");
-        pipeBottom = new Texture("bottomtube.png");
+        
         
         topBounds = new Rectangle(position.x, position.y + PIPE_GAP/2, pipeTop.getWidth(), pipeTop.getHeight());
         bottomBounds = new Rectangle(position.x, position.y + PIPE_GAP/2 - pipeBottom.getHeight(), pipeBottom.getWidth(), pipeBottom.getHeight());
@@ -56,15 +55,7 @@ public class Clouds {
         bottomBounds.setPosition(position.x, position.y + PIPE_GAP/2 - pipeBottom.getHeight());
     }
     
-    public boolean collides(KoopaBoi b){
-        if(topBounds.overlaps(b.getBounds())){
-            return true;
-        }
-        if(bottomBounds.overlaps(b.getBounds())){
-            return false;
-        }
-        return false;
-    }
+
     
     public void dispose(){
         pipeTop.dispose();

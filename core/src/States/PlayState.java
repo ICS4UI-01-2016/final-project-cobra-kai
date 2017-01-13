@@ -8,19 +8,7 @@
 import com.badlogic.gdx.Preferences;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.finalgame.game.FinalGame;
-
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.finalgame.game.Clouds;
-import com.finalgame.game.KoopaBoi;
-
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.finalgame.game.FinalGame;
-import com.finalgame.game.KoopaBoi;
-
+    
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -38,7 +26,9 @@ public class PlayState extends State {
 
     public PlayState(StateManager stm) {
         super(stm);
-        koopa = new KoopaBoi(FinalGame.WIDTH / 2, FinalGame.LENGTH / 2);
+        setCameraView(FinalGame.WIDTH / 2, FinalGame.LENGTH / 2);
+        koopa = new KoopaBoi(FinalGame.WIDTH / 4, FinalGame.LENGTH / 4);
+        moveCameraY(koopa.getY());
     }
 
     @Override

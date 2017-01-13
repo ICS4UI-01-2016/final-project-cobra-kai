@@ -24,8 +24,6 @@ public class MenuState extends State {
     private BitmapFont Font;
 
     public MenuState(StateManager gsm) {
-
-
         super(gsm);
         BG = new Texture("bg.png");
         Button = new Texture("playbtn.png");
@@ -78,7 +76,6 @@ public class MenuState extends State {
     public void dispose() {
         BG.dispose();
         Button.dispose();
-
     }
 }
 
