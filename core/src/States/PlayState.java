@@ -7,6 +7,7 @@ package States;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.finalgame.game.FinalGame;
 import com.finalgame.game.KoopaBoi;
 
 /**
@@ -20,7 +21,7 @@ public class PlayState extends State {
 
     public PlayState(StateManager stm) {
         super(stm);
-        koopa = new KoopaBoi(50, 0);
+        koopa = new KoopaBoi(FinalGame.WIDTH / 2, FinalGame.LENGTH / 2);
     }
 
     @Override
