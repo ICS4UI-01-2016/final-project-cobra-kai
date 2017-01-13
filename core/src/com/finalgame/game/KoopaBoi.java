@@ -30,12 +30,12 @@ public class KoopaBoi {
     public KoopaBoi(int x, int y) {
         position = new Vector3(x, y, 0);
         velocity = new Vector3(MOVEMENT, 0, 0);
-        start = new Texture("badlogic.jpg");
+        start = new Texture("start.png");
         hitBox = new Rectangle(position.x, position.y, start.getWidth(), start.getHeight());
     }
 
     public void jump() {
-        velocity.y = 0;
+        velocity.y = 300;
     }
 
     public void update(float deltaTime) {

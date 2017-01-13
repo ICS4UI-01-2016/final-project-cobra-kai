@@ -21,7 +21,9 @@ public class PlayState extends State {
 
     public PlayState(StateManager stm) {
         super(stm);
-        koopa = new KoopaBoi(FinalGame.WIDTH / 2, FinalGame.LENGTH / 2);
+        setCameraView(FinalGame.WIDTH / 2, FinalGame.LENGTH / 2);
+        koopa = new KoopaBoi(FinalGame.WIDTH / 4, FinalGame.LENGTH / 4);
+        moveCameraY(koopa.getY());
     }
 
     @Override
@@ -54,4 +56,6 @@ public class PlayState extends State {
     public void dispose() {
         koopa.dispose();
     }
+
+    
 }
