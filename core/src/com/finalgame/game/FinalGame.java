@@ -17,6 +17,7 @@ public class FinalGame extends ApplicationAdapter {
     public static final int LENGTH = 800;
     private SpriteBatch batch;
     private StateManager stateManager;
+    
 
     // Initial setup
     @Override
