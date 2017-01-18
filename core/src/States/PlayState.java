@@ -1,9 +1,14 @@
 /*
- * To change this template, choose Tools | Templates
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package States;
+    package States;
 
+import com.badlogic.gdx.Preferences;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.finalgame.game.FinalGame;
+    
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -12,7 +17,7 @@ import com.finalgame.game.KoopaBoi;
 
 /**
  *
- * @author sevcm7279
+ * @author lamon
  */
 public class PlayState extends State {
 
@@ -59,3 +64,5 @@ public class PlayState extends State {
 
     
 }
+
+

@@ -4,6 +4,7 @@ import States.MenuState;
 import States.PlayState;
 import States.State;
 import States.StateManager;
+import States.PlayState;
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
@@ -21,7 +22,7 @@ public class FinalGame extends ApplicationAdapter {
     @Override
     public void create() {
         batch = new SpriteBatch();
-        Gdx.gl.glClearColor(0, 1, 0, 0);
+        Gdx.gl.glClearColor(1, 0, 0, 0);
 
         stateManager = new StateManager();
         State firstScreen = new PlayState(stateManager);
