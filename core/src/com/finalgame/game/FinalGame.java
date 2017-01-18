@@ -13,8 +13,8 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 public class FinalGame extends ApplicationAdapter {
 
-    public static final int WIDTH = 480;
-    public static final int LENGTH = 800;
+    public static final int WIDTH = 1000;
+    public static final int LENGTH = 850;
     private SpriteBatch batch;
     private StateManager stateManager;
 
@@ -22,7 +22,7 @@ public class FinalGame extends ApplicationAdapter {
     @Override
     public void create() {
         batch = new SpriteBatch();
-        Gdx.gl.glClearColor(1, 0, 0, 0);
+    
 
         stateManager = new StateManager();
         State firstScreen = new PlayState(stateManager);

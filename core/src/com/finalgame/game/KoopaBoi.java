@@ -30,7 +30,7 @@ public class KoopaBoi {
     public KoopaBoi(int x, int y) {
         position = new Vector3(x, y, 0);
         velocity = new Vector3(MOVEMENT, 0, 0);
-        start = new Texture("Start.png");
+        start = new Texture("start.png");
         hitBox = new Rectangle(position.x, position.y, start.getWidth(), start.getHeight());
     }
 
