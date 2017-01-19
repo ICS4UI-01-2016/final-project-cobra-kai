@@ -8,6 +8,7 @@
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
     
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.finalgame.game.Clouds;
@@ -19,14 +20,18 @@ import com.finalgame.game.KoopaBoi;
  * @author lamon
  */
 public class PlayState extends State {
+    
+    
 
     private KoopaBoi koopa;
     private Texture bg;
-    private Clouds[] clouds;
-    private int Score;
-    private BitmapFont font;
     
-
+    private boolean right = false;
+    private boolean left = false;
+    
+    public static final int DPAD_RIGHT = Input.Keys.RIGHT;
+    public static final int DPAD_LEFT = Input.Keys.LEFT;
+    public static final int DPAD_UP= Input.Keys.UP;
     public PlayState(StateManager stm) {
         super(stm);
         setCameraView(FinalGame.WIDTH / 2, FinalGame.LENGTH / 2);
@@ -63,8 +68,20 @@ public class PlayState extends State {
 
     @Override
     public void handleInput() {
-        if (Gdx.input.justTouched()) {
+        if (Gdx.input.isKeyJustPressed(DPAD_UP)) {
             koopa.jump();
+        }
+        if (Gdx.input.isKeyJustPressed(Input.Keys.RIGHT)){
+           
+            koopa.moveRight();
+        
+            
+        }
+        if (Gdx.input.isKeyJustPressed(DPAD_LEFT)){
+          
+            koopa.moveLeft();
+        
+          
         }
     }
 
@@ -72,6 +89,8 @@ public class PlayState extends State {
     public void dispose() {
         koopa.dispose();
     }
+
+    
 }
 
 

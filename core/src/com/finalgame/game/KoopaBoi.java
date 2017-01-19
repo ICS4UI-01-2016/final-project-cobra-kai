@@ -37,10 +37,29 @@ public class KoopaBoi {
     public void jump() {
         velocity.y = 300;
     }
+    
+    public void moveLeft(){
+        
+            velocity.x = -30;
+        
+         
+        
+    }
+    public void moveRight( ){
+        
+            velocity.x = 30;
+        
+            
+        }
+    
 
     public void update(float deltaTime) {
         // add gravity
-        velocity.y += GRAVITY;
+        if (position.y >= 0){
+            velocity.y += GRAVITY;
+        }else{
+            velocity.y = 0;
+        }
         // scaling velocity by time
         velocity.scl(deltaTime);
         // adding velocity to position
