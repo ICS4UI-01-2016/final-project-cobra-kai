@@ -29,6 +29,7 @@ public class PlayState extends State {
     
     private boolean right = false;
     private boolean left = false;
+    private boolean jump = false;
     
     public static final int DPAD_RIGHT = Input.Keys.RIGHT;
     public static final int DPAD_LEFT = Input.Keys.LEFT;
@@ -44,7 +45,10 @@ public class PlayState extends State {
     public void render(SpriteBatch batch) {
         batch.setProjectionMatrix(getCombinedCamera());
         batch.begin();
-        koopa.render(batch);
+        
+            koopa.render(batch);
+        
+        
         batch.end();
     }
 
@@ -63,11 +67,12 @@ public class PlayState extends State {
     public void handleInput() {
         if (Gdx.input.isKeyJustPressed(DPAD_UP)) {
             koopa.jump();
+            
         }
         if (Gdx.input.isKeyJustPressed(Input.Keys.RIGHT)){
            
             koopa.moveRight();
-        
+            
             
         }
         if (Gdx.input.isKeyJustPressed(DPAD_LEFT)){

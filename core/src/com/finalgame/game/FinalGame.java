@@ -23,10 +23,10 @@ public class FinalGame extends ApplicationAdapter {
     @Override
     public void create() {
         batch = new SpriteBatch();
-        Gdx.gl.glClearColor(1, 0, 0, 0);
+        Gdx.gl.glClearColor(0, 0, 1, 0);
 
         stateManager = new StateManager();
-        State firstScreen = new PlayState(stateManager);
+        State firstScreen = new MenuState(stateManager);
         stateManager.push(firstScreen);
     }
 
