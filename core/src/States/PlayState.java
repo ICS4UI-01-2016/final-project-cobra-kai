@@ -5,14 +5,13 @@
  */
     package States;
 
-import com.badlogic.gdx.Preferences;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
-import com.finalgame.game.FinalGame;
     
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.finalgame.game.Clouds;
 import com.finalgame.game.FinalGame;
 import com.finalgame.game.KoopaBoi;
 
@@ -39,6 +38,14 @@ public class PlayState extends State {
         setCameraView(FinalGame.WIDTH / 2, FinalGame.LENGTH / 2);
         koopa = new KoopaBoi(FinalGame.WIDTH / 4, FinalGame.LENGTH / 4);
         moveCameraY(koopa.getY());
+        
+        clouds = new Clouds[3];
+        for (int i = 0; i < clouds.length; i++) {
+            clouds[i] = new Clouds(200 + (1 + 1 + 1) * Clouds.WIDTH * i);
+        }
+        Score = 0;
+        font = new BitmapFont();
+
     }
 
     @Override
