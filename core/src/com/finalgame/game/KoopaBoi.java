@@ -75,10 +75,15 @@ public class KoopaBoi {
     }
 
     public void render(SpriteBatch batch) {
-        batch.draw(start, position.x, position.y);
+        if (position.y > 0){
+            batch.draw(start, position.x, position.y);
+        }
         if (position.y <= 0){
             start.dispose();
-            batch.draw(death, position.x - 40, -20);
+            batch.draw(death, position.x, position.y);
+        }
+        if (position.x >= 1000){
+            batch.draw(start, 0, position.y);
         }
         
     }

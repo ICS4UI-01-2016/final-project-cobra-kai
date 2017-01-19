@@ -39,12 +39,7 @@ public class PlayState extends State {
         koopa = new KoopaBoi(FinalGame.WIDTH / 4, FinalGame.LENGTH / 4);
         moveCameraY(koopa.getY());
         
-        clouds = new Clouds[3];
-        for (int i = 0; i < clouds.length; i++) {
-            clouds[i] = new Clouds(200 + (1 + 1 + 1) * Clouds.WIDTH * i);
-        }
-        Score = 0;
-        font = new BitmapFont();
+        
 
     }
 
