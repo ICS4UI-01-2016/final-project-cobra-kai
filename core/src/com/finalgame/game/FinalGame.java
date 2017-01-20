@@ -26,7 +26,7 @@ public class FinalGame extends ApplicationAdapter {
     
 
         stateManager = new StateManager();
-        State firstScreen = new PlayState(stateManager);
+        State firstScreen = new MenuState(stateManager);
         stateManager.push(firstScreen);
     }
 
