@@ -72,16 +72,18 @@ public class PlayState extends State {
             
         }
         if (Gdx.input.isKeyJustPressed(Input.Keys.RIGHT)){
-           
+            
             koopa.moveRight();
             
             
         }
-        if (Gdx.input.isKeyJustPressed(DPAD_LEFT)){
+        if (Gdx.input.isKeyJustPressed(DPAD_LEFT) == true){
           
             koopa.moveLeft();
         
           
+        }else{
+           
         }
     }
 
