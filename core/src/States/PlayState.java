@@ -104,17 +104,26 @@ public class PlayState extends State {
             }
 
         }
+        
+        if(koopa.getX() >= 1000){
+            koopa.setX(0);
+        }
     }
 
     @Override
     public void handleInput() {
-        if (Gdx.input.isKeyJustPressed(Input.Keys.UP) == true) {
+        if(Gdx.input.isKeyJustPressed(Input.Keys.UP) == true) {
             koopa.jump();
+            
         }
-        if (Gdx.input.isKeyJustPressed(Input.Keys.RIGHT)) {
-            koopa.moveRight();
+        if(Gdx.input.isKeyPressed(Input.Keys.RIGHT) == true){
+           
+            koopa.moveRight();    
         }
-        if (Gdx.input.isKeyJustPressed(DPAD_LEFT)) {
+
+
+        if(Gdx.input.isKeyPressed(DPAD_LEFT) == true){
+          
             koopa.moveLeft();
         }
     }
