@@ -5,14 +5,13 @@
  */
     package States;
 
-import com.badlogic.gdx.Preferences;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
-import com.finalgame.game.FinalGame;
     
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.finalgame.game.Clouds;
 import com.finalgame.game.FinalGame;
 import com.finalgame.game.KoopaBoi;
 
@@ -29,6 +28,7 @@ public class PlayState extends State {
     
     private boolean right = false;
     private boolean left = false;
+    private boolean jump = false;
     
     public static final int DPAD_RIGHT = Input.Keys.RIGHT;
     public static final int DPAD_LEFT = Input.Keys.LEFT;
@@ -38,13 +38,19 @@ public class PlayState extends State {
         setCameraView(FinalGame.WIDTH / 2, FinalGame.LENGTH / 2);
         koopa = new KoopaBoi(FinalGame.WIDTH / 4, FinalGame.LENGTH / 4);
         moveCameraY(koopa.getY());
+        
+        
+
     }
 
     @Override
     public void render(SpriteBatch batch) {
         batch.setProjectionMatrix(getCombinedCamera());
         batch.begin();
-        koopa.render(batch);
+        
+            koopa.render(batch);
+        
+        
         batch.end();
     }
 
@@ -67,6 +73,7 @@ public class PlayState extends State {
     public void handleInput() {
         if(Gdx.input.isKeyJustPressed(Input.Keys.UP) == true) {
             koopa.jump();
+            
         }
         if(Gdx.input.isKeyPressed(Input.Keys.RIGHT) == true){
            

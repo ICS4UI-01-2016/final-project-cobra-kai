@@ -18,10 +18,10 @@ public class KoopaBoi {
     private Vector3 position;
     private Vector3 velocity;
     private Texture jumpRight;
-    private Texture jumpLeft;
+    private Texture jump;
     private Texture fallLeft;
     private Texture fallRight;
-    private Texture hitGround;
+    private Texture death;
     private Texture start;
     private Rectangle hitBox;
     private final float GRAVITY = -12;
@@ -31,6 +31,9 @@ public class KoopaBoi {
         position = new Vector3(x, y, 0);
         velocity = new Vector3(MOVEMENT, 0, 0);
         start = new Texture("start.png");
+        jump = new Texture("jump.png");
+        death = new Texture("death.png");
+        
         hitBox = new Rectangle(position.x, position.y, start.getWidth(), start.getHeight());
     }
 
@@ -67,7 +70,17 @@ public class KoopaBoi {
     }
 
     public void render(SpriteBatch batch) {
-        batch.draw(start, position.x, position.y);
+        if (position.y > 0){
+            batch.draw(start, position.x, position.y);
+        }
+        if (position.y <= 0){
+            start.dispose();
+            batch.draw(death, position.x, position.y);
+        }
+        if (position.x >= 1000){
+            batch.draw(start, 0, position.y);
+        }
+        
     }
     
     public float setX(float NewX){
@@ -89,5 +102,6 @@ public class KoopaBoi {
 
     public void dispose() {
         start.dispose();
+        death.dispose();
     }
 }
