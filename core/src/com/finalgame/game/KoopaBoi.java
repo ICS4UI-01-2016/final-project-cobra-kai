@@ -35,21 +35,16 @@ public class KoopaBoi {
     }
 
     public void jump() {
-        velocity.y = 300;
+        velocity.y = 500;
     }
     
     public void moveLeft(){
         
-            velocity.x = -30;
-        
-         
-        
+            velocity.x = -100;
     }
     public void moveRight( ){
         
-            velocity.x = 30;
-        
-            
+            velocity.x = 100;  
         }
     
 
@@ -73,6 +68,11 @@ public class KoopaBoi {
 
     public void render(SpriteBatch batch) {
         batch.draw(start, position.x, position.y);
+    }
+    
+    public float setX(float NewX){
+        position.x = NewX;
+        return position.x;
     }
 
     public float getX() {
