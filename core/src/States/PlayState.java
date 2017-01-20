@@ -49,7 +49,8 @@ public class PlayState extends State {
         batch.begin();
         
             koopa.render(batch);
-        
+            
+
         
         batch.end();
     }
@@ -64,9 +65,6 @@ public class PlayState extends State {
             
         }
         
-        if(koopa.getX() >= 1000){
-            koopa.setX(0);
-        }
     }
 
     @Override
