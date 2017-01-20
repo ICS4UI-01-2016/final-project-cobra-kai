@@ -3,12 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-    package States;
+package States;
 
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
-    
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.Preferences;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.finalgame.game.Clouds;
@@ -20,25 +21,25 @@ import com.finalgame.game.KoopaBoi;
  * @author lamon
  */
 public class PlayState extends State {
-    
-    
 
     private KoopaBoi koopa;
     private Texture bg;
-    
+    private Clouds[] clouds;
+    private int Score;
+    private BitmapFont font;
     private boolean right = false;
     private boolean left = false;
-    
     public static final int DPAD_RIGHT = Input.Keys.RIGHT;
     public static final int DPAD_LEFT = Input.Keys.LEFT;
-    public static final int DPAD_UP= Input.Keys.UP;
+    public static final int DPAD_UP = Input.Keys.UP;
+
     public PlayState(StateManager stm) {
         super(stm);
         setCameraView(FinalGame.WIDTH / 2, FinalGame.LENGTH / 2);
         koopa = new KoopaBoi(FinalGame.WIDTH / 4, FinalGame.LENGTH / 4);
         moveCameraY(koopa.getY());
-        
-        clouds = new Clouds[3];
+
+        clouds = new Clouds[6];
         for (int i = 0; i < clouds.length; i++) {
             clouds[i] = new Clouds(200 + (1 + 1 + 1) * Clouds.WIDTH * i);
         }
@@ -52,45 +53,77 @@ public class PlayState extends State {
         batch.setProjectionMatrix(getCombinedCamera());
         batch.begin();
         koopa.render(batch);
+
+        for (int i = 0; i < clouds.length; i++) {
+            clouds[i].render(batch);
+        }
         batch.end();
     }
 
     @Override
     public void update(float deltaTime) {
         koopa.update(deltaTime);
-        if (koopa.getY() <= 0) {
+        for (int i = 0; i < clouds.length; i++) {
+            clouds[i].update();
+        }
+        if (koopa.getY() <= -12) {
             // end the game
             StateManager gsm = getStateManager();
             // pop off the game screen to go to menu
-            
+
+        }
+
+
+        //did the bird hit the pipe?
+        for (int i = 0; i < clouds.length; i++) {
+            if (clouds[i].collides(koopa)) {
+                //end the game
+                StateManager GSM = getStateManager();
+                //pop off 
+                GSM.pop();
+                //Get current highscore
+                Preferences Pref = Gdx.app.getPreferences("HighScore");
+                int HighScore = Pref.getInteger("HighScore", 0);
+                //did they beat it?
+                if (Score > HighScore) {
+                    Pref.putInteger("HighScore", Score);
+                    //save it
+                    Pref.flush();
+                }
+            } else if (!clouds[i].hasPassed()
+                    && koopa.getX() > clouds[i].getY() + Clouds.WIDTH) {
+                Score++;
+                clouds[i].pass();
+            }
+        }
+        for (int i = 0; i < clouds.length; i++) {
+            if(clouds[i].getY() <= -30) {
+                float y = (int) (Math.random() * (1800 - 900 + 1) + 900);
+                float x = (int) (Math.random() * (900 - 100 + 1) + 30);
+                clouds[i].setY(x, y);
+            }
+
         }
     }
 
     @Override
     public void handleInput() {
-        if (Gdx.input.isKeyJustPressed(DPAD_UP)) {
+        if (Gdx.input.isKeyJustPressed(Input.Keys.UP) == true) {
             koopa.jump();
         }
-        if (Gdx.input.isKeyJustPressed(Input.Keys.RIGHT)){
-           
+        if (Gdx.input.isKeyJustPressed(Input.Keys.RIGHT)) {
             koopa.moveRight();
-        
-            
         }
-        if (Gdx.input.isKeyJustPressed(DPAD_LEFT)){
-          
+        if (Gdx.input.isKeyJustPressed(DPAD_LEFT)) {
             koopa.moveLeft();
-        
-          
         }
     }
 
     @Override
     public void dispose() {
         koopa.dispose();
+        for (int i = 0; i < clouds.length; i++) {
+            clouds[i].dispose();
+        }
     }
-
-    
 }
-
-

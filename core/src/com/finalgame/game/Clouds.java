@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.math.Vector3;
 
 /**
  *
@@ -15,56 +16,73 @@ import com.badlogic.gdx.math.Vector2;
  */
 public class Clouds {
     //Need to revise
-    private final float PIPE_GAP = 100;
-    private final float MIN_HEIGHT = 50;
-    private final float MAX_HEIGHT = 350;
-    public static final float WIDTH = 52;
-    
+
+
+    public static final float WIDTH = 128;
     private boolean passed;
-    private Vector2 position;
+    private Vector3 position;
+    private Vector3 velocity;
     private Texture Cloud;
     private Rectangle CloudBounds;
+    private final float GRAVITY = -2;
+    private final float MOVEMENT1 = 0;
 
-    
-    public Clouds(float y){
-        float x = (int)(Math.random()*(1) + 75);
-        position = new Vector2(x,y);
-        Cloud = new Texture("Cloud.png");
+    public Clouds(float y) {
         
+        y = (int)(Math.random()*(1800-900+1) + 900);
+        float x = (int)(Math.random()*(700-30+1) + 30);
         
+        position = new Vector3(x, y, 0);
+        Cloud = new Texture("CloudBox.png");
+        velocity = new Vector3(MOVEMENT1, 0, 0);
+
         CloudBounds = new Rectangle(position.x, position.y, Cloud.getWidth(), Cloud.getHeight());
-        
+
         passed = false;
     }
+
+
+
     
-    public void render(SpriteBatch batch){
-        batch.draw(Cloud, position.x, position.y);        
+    public void render(SpriteBatch batch) {
+        batch.draw(Cloud, position.x, position.y);
+    }
+
+    public float getY() {
+        return position.y;
     }
     
-    public float getX(){
-        return position.x;
-    }
-    
-    public void setX(float x){
+    public void setY(float x, float y){
         passed = false;
         position.x = x;
-        float y = (int)(Math.random()*(325-75+1) + 75);
         position.y = y;
-        CloudBounds.setPosition(position.x, position.y + PIPE_GAP/2);
+        CloudBounds.setPosition(x, y);
     }
-    
 
-    
-    public void dispose(){
+    public boolean collides(KoopaBoi k) {
+        if (CloudBounds.overlaps(k.getHitBox())) {
+            return true;
+        }
+
+        return false;
+    }
+
+    public void update() {
+        // add gravity
+        position.y = position.y + GRAVITY;
+        // set the new bounds
+        CloudBounds.setPosition(position.x, position.y);
+    }
+
+    public void dispose() {
         Cloud.dispose();
     }
-    
-    public boolean hasPassed(){
+
+    public boolean hasPassed() {
         return passed;
     }
-    
-    public void pass(){
+
+    public void pass() {
         passed = true;
     }
 }
-
