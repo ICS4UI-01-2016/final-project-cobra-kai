@@ -29,8 +29,8 @@ public class Clouds {
 
     public Clouds(float y) {
         
-        y = (int)(Math.random()*(1800-900+1) + 900);
-        float x = (int)(Math.random()*(700-30+1) + 30);
+        y = -20;
+        float x = (int)(Math.random()*(600-30+1) + 30);
         
         position = new Vector3(x, y, 0);
         Cloud = new Texture("CloudBox.png");
@@ -52,11 +52,15 @@ public class Clouds {
         return position.y;
     }
     
+        public float getX() {
+        return position.x;
+    }
+    
     public void setY(float x, float y){
         passed = false;
         position.x = x;
         position.y = y;
-        CloudBounds.setPosition(x, y);
+        CloudBounds.setPosition(position.x, position.y);
     }
 
     public boolean collides(KoopaBoi k) {

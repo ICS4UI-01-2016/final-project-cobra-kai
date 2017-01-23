@@ -26,6 +26,8 @@ public class PlayState extends State {
     private KoopaBoi koopa;
     private Texture bg;
     private Clouds[] clouds;
+    private float y;
+    private float x;
     private int Score;
     private BitmapFont font;
     private boolean right = false;
@@ -76,12 +78,9 @@ public class PlayState extends State {
 
 
         //did the bird hit the pipe?
+
         for (int i = 0; i < clouds.length; i++) {
             if (clouds[i].collides(koopa)) {
-                //end the game
-                StateManager GSM = getStateManager();
-                //pop off 
-                GSM.pop();
                 //Get current highscore
                 Preferences Pref = Gdx.app.getPreferences("HighScore");
                 int HighScore = Pref.getInteger("HighScore", 0);
@@ -97,23 +96,41 @@ public class PlayState extends State {
                 clouds[i].pass();
             }
         }
+
+
         for (int i = 0; i < clouds.length; i++) {
-            if(clouds[i].getY() <= -30) {
-                float y = (int) (Math.random() * (1800 - 900 + 1) + 900);
-                float x = (int) (Math.random() * (900 - 100 + 1) + 30);
+            if (clouds[i].getY() <= -30) {
+                if (i == 0) {
+                    y = 500;
+                    x = 520;
+                } else {
+                    y = (int) (Math.random() * ((clouds[i - 1].getY() + 50) - (clouds[i - 1].getY()) + 1) + (clouds[i - 1].getY()));
+                    x = (int) (Math.random() * ((clouds[i - 1].getX() + 75) - (clouds[i - 1].getX()) + 1) + (clouds[i - 1].getX()));
+                }
                 clouds[i].setY(x, y);
             }
-
         }
-        
-        
+        for (int i = 0; i < clouds.length; i++) {
+            if (clouds[i].getY() <= koopa.getY()) {
+                if (clouds[i].collides(koopa)) {
+                    koopa.jump();
+                    //end the game
+                    //StateManager GSM = getStateManager();
+                    //pop off 
+                    //GSM.pop();
+                }
+            }
+        }
+
+
+
     }
 
     @Override
     public void handleInput() {
-        if(Gdx.input.isKeyJustPressed(Input.Keys.UP) == true) {
+        if (Gdx.input.isKeyJustPressed(Input.Keys.UP) == true) {
             koopa.jump();
-            
+
         }
         if(Gdx.input.isKeyPressed(Input.Keys.RIGHT) == true){
            
@@ -124,8 +141,8 @@ public class PlayState extends State {
       
 
 
-        if(Gdx.input.isKeyPressed(DPAD_LEFT) == true){
-          
+        if (Gdx.input.isKeyPressed(DPAD_LEFT) == true) {
+
             koopa.moveLeft();
         }
     }
