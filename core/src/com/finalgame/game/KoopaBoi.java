@@ -49,6 +49,9 @@ public class KoopaBoi {
     public void moveRight() {
         velocity.x = 110;
     }
+    public void standStill(){
+        velocity.x = 0;
+    }
 
     public void update(float deltaTime) {
         // add gravity
@@ -64,9 +67,15 @@ public class KoopaBoi {
         // unscale velocity
         velocity.scl(1 / deltaTime);
 
-        if (position.x >= 900) {
-            position.x = 0;
+        if (position.x >= 470) {
+            position.x = 5;
         }
+        
+        if (position.x <= 0){
+            position.x = 460;
+        }
+        
+        System.out.println(position.y);
 
         // set the new bounds
         hitBox.setPosition(position.x, position.y);

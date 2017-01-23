@@ -22,6 +22,7 @@ import com.finalgame.game.KoopaBoi;
  */
 public class PlayState extends State {
 
+
     private KoopaBoi koopa;
     private Texture bg;
     private Clouds[] clouds;
@@ -105,6 +106,7 @@ public class PlayState extends State {
 
         }
         
+        
     }
 
     @Override
@@ -116,7 +118,10 @@ public class PlayState extends State {
         if(Gdx.input.isKeyPressed(Input.Keys.RIGHT) == true){
            
             koopa.moveRight();    
+        }else{
+            koopa.standStill();
         }
+      
 
 
         if(Gdx.input.isKeyPressed(DPAD_LEFT) == true){
@@ -132,4 +137,5 @@ public class PlayState extends State {
             clouds[i].dispose();
         }
     }
+    
 }
