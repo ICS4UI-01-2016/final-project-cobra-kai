@@ -74,8 +74,6 @@ public class KoopaBoi {
         if (position.x <= 0){
             position.x = 460;
         }
-        
-        System.out.println(position.y);
 
         // set the new bounds
         hitBox.setPosition(position.x, position.y);
