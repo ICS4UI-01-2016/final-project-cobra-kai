@@ -56,7 +56,7 @@ public class PlayState extends State {
     public void render(SpriteBatch batch) {
         batch.setProjectionMatrix(getCombinedCamera());
         batch.begin();
-        batch.draw(BG, 0, 0, getViewWidth(), getViewHeight());
+        batch.draw(BG, 0, koopa.getY() - 212, getViewWidth(), getViewHeight());
         koopa.render(batch);
         Font.draw(batch, "Score: " + Score, 12, koopa.getY() + 120);
         for (int i = 0; i < clouds.length; i++) {
@@ -159,7 +159,6 @@ public class PlayState extends State {
                 }
             }
         }     
-
     }
 
     @Override

@@ -20,7 +20,7 @@ public class KoopaBoi {
     private Vector3 velocity;
     private Texture jumpRight;
     private Texture jump;
-    private Texture fallLeft;
+    private Texture left;
     private Texture fallRight;
     private Texture death;
     private Texture start;
@@ -34,6 +34,7 @@ public class KoopaBoi {
         start = new Texture("start.png");
         jump = new Texture("jump.png");
         death = new Texture("death.png");
+        left = new Texture("left.png");
 
         hitBox = new Rectangle(position.x, position.y, start.getWidth(), start.getHeight());
     }
@@ -66,9 +67,7 @@ public class KoopaBoi {
             velocity.y = 0;
             velocity.x = 0;
         }
-        if (position.x >= 1000) {
-            position.x -= 1000;
-        }
+        
         // scaling velocity by time
         velocity.scl(deltaTime);
         // adding velocity to position
@@ -91,13 +90,15 @@ public class KoopaBoi {
     }
 
     public void render(SpriteBatch batch) {
-
-        if (position.y > 0) {
+        // save the current position
+        if (velocity.x == 0 || velocity.x == 220) {
             batch.draw(start, position.x, position.y);
         }
         if (position.y <= 0) {
             start.dispose();
             batch.draw(death, position.x, position.y);
+        }if (velocity.x == -220){
+            batch.draw(left, position.x, position.y);
         }
 
     }
