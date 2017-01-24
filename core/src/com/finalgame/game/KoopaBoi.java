@@ -45,15 +45,12 @@ public class KoopaBoi {
     public void moveLeft() {
         velocity.x = -220;
     }
-    
+
     public void moveRight() {
-
-        velocity.x = 180;
-
         velocity.x = 220;
-
     }
-    public void standStill(){
+
+    public void standStill() {
         velocity.x = 0;
     }
 
@@ -74,10 +71,12 @@ public class KoopaBoi {
         if (position.x >= 470) {
             position.x = 5;
         }
-        
-        if (position.x <= 0){
+
+        if (position.x <= 0) {
             position.x = 460;
         }
+
+        System.out.println(position.y);
 
         // set the new bounds
         hitBox.setPosition(position.x, position.y);
@@ -92,7 +91,6 @@ public class KoopaBoi {
             start.dispose();
             batch.draw(death, position.x, position.y);
         }
-
 
     }
 

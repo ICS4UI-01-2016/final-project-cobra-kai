@@ -104,20 +104,13 @@ public class PlayState extends State {
                 if (i == 0) {
                     y = (int) (Math.random() * ((clouds[9].getY() + 140) - (clouds[9].getY() + 100) + 1) + (clouds[9].getY() + 100));
                     x = -50;
-
-
                     while (10.0 > x || x > 400.0) {
-
                     int LR = (int) (Math.random() * (2 - 1 + 1) + 1);
                         if(LR == 1){
                         x = (int) (Math.random() * ((clouds[clouds.length - 2].getX() + 160) - (clouds[clouds.length - 2].getX() + 120) + 1) + (clouds[9].getX() + 120));
                         }
                         if(LR == 2){
-
-                        x = (int) (Math.random() * ((clouds[clouds.length - 2].getX() - 120) - (clouds[clouds.length - 2].getX() - 160) + 1) + (clouds[9].getX() - 10));
-
                         x = (int) (Math.random() * ((clouds[clouds.length - 2].getX() - 120) - (clouds[clouds.length - 2].getX() - 160) + 1) + (clouds[9].getX() - 160));
-
                         }
                     }
                     System.out.println("SX " + i + " " + x + " 9: " + (clouds[clouds.length - 2]));
