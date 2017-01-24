@@ -39,7 +39,7 @@ public class KoopaBoi {
     }
 
     public void jump() {
-        velocity.y = 300;
+        velocity.y = 500;
     }
 
     public void moveLeft() {
@@ -98,6 +98,11 @@ public class KoopaBoi {
 
 
 
+    }
+    
+    public float setX(float NewX){
+        position.x = NewX;
+        return position.x;
     }
 
     public float getX() {

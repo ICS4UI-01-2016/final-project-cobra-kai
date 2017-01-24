@@ -32,7 +32,7 @@ public class PlayState extends State {
     
     public static final int DPAD_RIGHT = Input.Keys.RIGHT;
     public static final int DPAD_LEFT = Input.Keys.LEFT;
-    public static final int DPAD_UP= Input.Keys.UP;
+    public static final int DPAD_UP = Input.Keys.UP;
     public PlayState(StateManager stm) {
         super(stm);
         setCameraView(FinalGame.WIDTH / 2, FinalGame.LENGTH / 2);
@@ -63,21 +63,25 @@ public class PlayState extends State {
             // pop off the game screen to go to menu
             
         }
+        
+        if(koopa.getX() >= 1000){
+            koopa.setX(0);
+        }
     }
 
     @Override
     public void handleInput() {
-        if (Gdx.input.isKeyJustPressed(DPAD_UP)) {
+        if(Gdx.input.isKeyJustPressed(Input.Keys.UP) == true) {
             koopa.jump();
             
         }
-        if (Gdx.input.isKeyJustPressed(Input.Keys.RIGHT)){
-            
-            koopa.moveRight();
-            
-            
+        if(Gdx.input.isKeyPressed(Input.Keys.RIGHT) == true){
+           
+            koopa.moveRight();    
         }
-        if (Gdx.input.isKeyJustPressed(DPAD_LEFT) == true){
+
+
+        if(Gdx.input.isKeyPressed(DPAD_LEFT) == true){
           
             koopa.moveLeft();
         
