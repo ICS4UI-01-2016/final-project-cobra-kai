@@ -58,10 +58,10 @@ public class PlayState extends State {
         batch.begin();
         batch.draw(BG, 0, 0, getViewWidth(), getViewHeight());
         koopa.render(batch);
-        Font.draw(batch, "Score: " + Score, 12, koopa.getY() + 120);
         for (int i = 0; i < clouds.length; i++) {
             clouds[i].render(batch);
         }
+        Font.draw(batch, "Score: " + Score, 12, koopa.getY() + 200);
         batch.end();
     }
 
