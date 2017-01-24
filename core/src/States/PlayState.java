@@ -22,7 +22,6 @@ import com.finalgame.game.KoopaBoi;
  */
 public class PlayState extends State {
 
-
     private KoopaBoi koopa;
     private Texture bg;
     private Clouds[] clouds;
@@ -41,10 +40,11 @@ public class PlayState extends State {
         setCameraView(FinalGame.WIDTH / 2, FinalGame.LENGTH / 2);
         koopa = new KoopaBoi(FinalGame.WIDTH / 4, FinalGame.LENGTH / 4);
         moveCameraY(koopa.getY());
-
-        clouds = new Clouds[6];
-        for (int i = 0; i < clouds.length; i++) {
-            clouds[i] = new Clouds(200 + (1 + 1 + 1) * Clouds.WIDTH * i);
+        //If you change the size of the clouds array, you must also scale the exception where the clouds are generated in Clouds.java
+        clouds = new Clouds[11];
+        clouds[10] = new Clouds(10);
+        for (int i = 0; i < clouds.length - 1; i++) {
+            clouds[i] = new Clouds(i);
         }
         Score = 0;
         font = new BitmapFont();
@@ -57,7 +57,7 @@ public class PlayState extends State {
         batch.begin();
         koopa.render(batch);
 
-        for (int i = 0; i < clouds.length; i++) {
+        for (int i = 0; i < clouds.length - 1; i++) {
             clouds[i].render(batch);
         }
         batch.end();
@@ -66,7 +66,7 @@ public class PlayState extends State {
     @Override
     public void update(float deltaTime) {
         koopa.update(deltaTime);
-        for (int i = 0; i < clouds.length; i++) {
+        for (int i = 0; i < clouds.length - 1; i++) {
             clouds[i].update();
         }
         if (koopa.getY() <= -12) {
@@ -76,10 +76,8 @@ public class PlayState extends State {
 
         }
 
-
         //did the bird hit the pipe?
-
-        for (int i = 0; i < clouds.length; i++) {
+        for (int i = 0; i < clouds.length - 1; i++) {
             if (clouds[i].collides(koopa)) {
                 //Get current highscore
                 Preferences Pref = Gdx.app.getPreferences("HighScore");
@@ -96,20 +94,42 @@ public class PlayState extends State {
                 clouds[i].pass();
             }
         }
-
-
-        for (int i = 0; i < clouds.length; i++) {
+        for (int i = 0; i < clouds.length - 1; i++) {
             if (clouds[i].getY() <= -30) {
                 if (i == 0) {
-                    y = 500;
-                    x = 520;
+                    y = (int) (Math.random() * ((clouds[9].getY() + 140) - (clouds[9].getY() + 100) + 1) + (clouds[9].getY() + 100));
+                    while (10.0 > x || x > 460.0) {
+                    int LR = (int) (Math.random() * (2 - 1 + 1) + 1);
+                        if(LR == 1){
+                        x = (int) (Math.random() * ((clouds[clouds.length - 2].getX() + 170) - (clouds[clouds.length - 2].getX() + 120) + 1) + (clouds[9].getX() + 120));
+                        }
+                        if(LR == 2){
+                        x = (int) (Math.random() * ((clouds[clouds.length - 2].getX() - 120) - (clouds[clouds.length - 2].getX() - 170) + 1) + (clouds[9].getX() - 170));
+                        }
+                    }
+                    System.out.println("SX " + i + " " + x);
+                    System.out.println("SY " + i  + " " + y);
                 } else {
-                    y = (int) (Math.random() * ((clouds[i - 1].getY() + 50) - (clouds[i - 1].getY()) + 1) + (clouds[i - 1].getY()));
-                    x = (int) (Math.random() * ((clouds[i - 1].getX() + 75) - (clouds[i - 1].getX()) + 1) + (clouds[i - 1].getX()));
+
+                    y = (int) (Math.random() * ((clouds[i - 1].getY() + 140) - (clouds[i - 1].getY() + 100) + 1) + (clouds[i - 1].getY() + 100));
+                    System.out.println("Y " + y);
+                    x = -50;
+                    while (10.0 > x || x > 460.0) {
+                        int LR = (int) (Math.random() * (2 - 1 + 1) + 1);
+                        if(LR == 1){
+                        x = (int) (Math.random() * ((clouds[i - 1].getX() + 160) - (clouds[i - 1].getX() + 120) + 1) + (clouds[i - 1].getX() + 120));
+                        }
+                        if(LR == 2){
+                        x = (int) (Math.random() * ((clouds[i - 1].getX() - 120) - (clouds[i - 1].getX() - 170) + 1) + (clouds[i - 1].getX() - 170));
+                        }
+                        
+                        System.out.println("X " + i + " " + x + " " + LR + " " + clouds[i - 1].getX());
+                    }
                 }
-                clouds[i].setY(x, y);
+                clouds[i].setPos(x, y);
             }
         }
+
         for (int i = 0; i < clouds.length; i++) {
             if (clouds[i].getY() <= koopa.getY()) {
                 if (clouds[i].collides(koopa)) {
@@ -122,8 +142,6 @@ public class PlayState extends State {
             }
         }
 
-
-
     }
 
     @Override
@@ -132,14 +150,12 @@ public class PlayState extends State {
             koopa.jump();
 
         }
-        if(Gdx.input.isKeyPressed(Input.Keys.RIGHT) == true){
-           
-            koopa.moveRight();    
-        }else{
+        if (Gdx.input.isKeyPressed(Input.Keys.RIGHT) == true) {
+
+            koopa.moveRight();
+        } else {
             koopa.standStill();
         }
-      
-
 
         if (Gdx.input.isKeyPressed(DPAD_LEFT) == true) {
 
@@ -154,5 +170,5 @@ public class PlayState extends State {
             clouds[i].dispose();
         }
     }
-    
+
 }

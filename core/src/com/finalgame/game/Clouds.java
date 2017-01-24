@@ -17,9 +17,10 @@ import com.badlogic.gdx.math.Vector3;
 public class Clouds {
     //Need to revise
 
-
     public static final float WIDTH = 128;
     private boolean passed;
+    private float x;
+    private float y;
     private Vector3 position;
     private Vector3 velocity;
     private Texture Cloud;
@@ -27,11 +28,14 @@ public class Clouds {
     private final float GRAVITY = -2;
     private final float MOVEMENT1 = 0;
 
-    public Clouds(float y) {
-        
-        y = -20;
-        float x = (int)(Math.random()*(600-30+1) + 30);
-        
+    public Clouds(float i) {
+        if (i == 10) {
+            y = FinalGame.LENGTH / 4 - 30;
+            x = FinalGame.WIDTH / 4;
+        } else {
+            y = -20;
+            x = (int) (Math.random() * (400 - 60 + 1) + 60);
+        }
         position = new Vector3(x, y, 0);
         Cloud = new Texture("CloudBox.png");
         velocity = new Vector3(MOVEMENT1, 0, 0);
@@ -41,9 +45,6 @@ public class Clouds {
         passed = false;
     }
 
-
-
-    
     public void render(SpriteBatch batch) {
         batch.draw(Cloud, position.x, position.y);
     }
@@ -51,12 +52,12 @@ public class Clouds {
     public float getY() {
         return position.y;
     }
-    
-        public float getX() {
+
+    public float getX() {
         return position.x;
     }
-    
-    public void setY(float x, float y){
+
+    public void setPos(float x, float y) {
         passed = false;
         position.x = x;
         position.y = y;
