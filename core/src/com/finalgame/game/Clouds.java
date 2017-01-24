@@ -46,6 +46,10 @@ public class Clouds {
 
         passed = false;
     }
+    
+    public int getWidth(){
+        return Cloud.getWidth();
+    }
 
     public void render(SpriteBatch batch) {
         batch.draw(Cloud, position.x, position.y);
