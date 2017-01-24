@@ -34,7 +34,6 @@ public class PlayState extends State {
     public static final int DPAD_RIGHT = Input.Keys.RIGHT;
     public static final int DPAD_LEFT = Input.Keys.LEFT;
     public static final int DPAD_UP = Input.Keys.UP;
-    int hup = (int) koopa.getY();
 
     public PlayState(StateManager stm) {
         super(stm);
@@ -81,10 +80,10 @@ public class PlayState extends State {
             gsm.pop();
 
         }
-        int hup = (int) koopa.getY();
-        if (hup > koopa.getY()){
-            
-        Score = (int)hup();}
+        
+        if (koopa.getY() >= Score){
+            Score = (int) koopa.getY();
+        }
         //did the bird hit the pipe?
         for (int i = 0; i < clouds.length; i++) {
             if (clouds[i].collides(koopa)) {
