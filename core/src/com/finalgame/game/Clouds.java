@@ -31,6 +31,7 @@ public class Clouds {
     private final float MOVEMENT1 = 0;
 
     public Clouds(float i) {
+        //This if exception generates a still cloud directly below the cloud's start position.
         if (i == 10) {
             y = FinalGame.LENGTH / 4 - 30;
             x = FinalGame.WIDTH / 4;

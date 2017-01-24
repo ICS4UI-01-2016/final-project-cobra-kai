@@ -72,22 +72,26 @@ public class PlayState extends State {
 
     @Override
     public void update(float deltaTime) {
+        //The start cloud should 'despawn' (it just moves it far away so the player can't land on it)
+        if (koopa.getY()- 400 >= clouds[clouds.length - 1].getY()) {
+            clouds[clouds.length - 1].setPos(1100, -1100);
+        }
         koopa.update(deltaTime);
         moveCameraY(koopa.getY());
         for (int i = 0; i < clouds.length; i++) {
             clouds[i].update(deltaTime);
-            
+
         }
         if (koopa.getY() <= Score - 1000 || koopa.getY() <= 0) {
             // end the game
             StateManager gsm = getStateManager();
-            
+
             // pop off the game screen to go to menu
             gsm.pop();
 
         }
-        
-        if (koopa.getY() >= Score){
+
+        if (koopa.getY() >= Score) {
             Score = (int) koopa.getY();
         }
         //did the bird hit the pipe?
@@ -111,12 +115,12 @@ public class PlayState extends State {
             clouds[i].sideMotion(clouds[i].getX());
         }
         for (int i = 0; i < clouds.length - 1; i++) {
-            if (clouds[i].getY() <= koopa.getY() - 300) {
+            if (clouds[i].getY() <= koopa.getY() - 400) {
                 float cloudWidth = clouds[0].getWidth();
                 if (i == 0) {
                     float getArrayX = clouds[clouds.length - 2].getX();
                     float getArrayY = clouds[9].getY();
-                    
+
                     y = (int) (Math.random() * ((getArrayY + 140) - (getArrayY + 100) + 1) + (getArrayY + 100));
                     x = -50;
                     while (10.0 > x || x > 400.0) {
@@ -128,14 +132,14 @@ public class PlayState extends State {
                             x = (int) (Math.random() * ((getArrayX - 100) - (getArrayX - 200) + 1) + (getArrayX - 200));
                         }
                     }
-                    
+
                 } else {
                     float getArrayX = clouds[i - 1].getX();
                     float getArrayY = clouds[i - 1].getY();
                     y = (int) (Math.random() * ((getArrayY + 140) - (getArrayY + 100) + 1) + (getArrayY + 100));
-                    
+
                     x = -50;
-                    
+
                     while (10.0 > x || x > 400.0) {
                         int LR = (int) (Math.random() * (2 - 1 + 1) + 1);
                         if (LR == 1) {
@@ -164,7 +168,7 @@ public class PlayState extends State {
                     }
                 }
             }
-        }     
+        }
     }
 
     @Override
