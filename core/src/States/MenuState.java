@@ -17,7 +17,8 @@ import com.finalgame.game.FinalGame;
  * @author coulh9904
  */
 public class MenuState extends State {
-
+    
+    private Texture GBG;
     private Texture BG;
     private Texture Button;
     private int HighScore;
@@ -25,7 +26,7 @@ public class MenuState extends State {
 
     public MenuState(StateManager gsm) {
         super(gsm);
-        BG = new Texture("bg.jpg");
+        GBG = new Texture("Background.jpg");
         Button = new Texture("TheStartButton.png");
         setCameraView(FinalGame.WIDTH, FinalGame.LENGTH);
         setCameraPosition(getViewWidth() / 2, getViewHeight() / 2);
