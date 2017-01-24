@@ -33,7 +33,7 @@ public class Clouds {
             y = FinalGame.LENGTH / 4 - 30;
             x = FinalGame.WIDTH / 4;
         } else {
-            y = -20;
+            y = -1000;
             x = (int) (Math.random() * (400 - 60 + 1) + 60);
         }
         position = new Vector3(x, y, 0);
@@ -74,7 +74,7 @@ public class Clouds {
 
     public void update() {
         // add gravity
-        position.y = position.y + GRAVITY;
+        position.y = position.y;
         // set the new bounds
         CloudBounds.setPosition(position.x, position.y);
     }
