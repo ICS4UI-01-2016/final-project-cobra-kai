@@ -28,7 +28,7 @@ public class PlayState extends State {
     private float y;
     private float x;
     private int Score;
-    private BitmapFont font;
+    private BitmapFont Font;
     private boolean right = false;
     private boolean left = false;
     public static final int DPAD_RIGHT = Input.Keys.RIGHT;
@@ -47,7 +47,7 @@ public class PlayState extends State {
             clouds[i] = new Clouds(i);
         }
         Score = 0;
-        font = new BitmapFont();
+        Font = new BitmapFont();
 
     }
 
@@ -56,7 +56,7 @@ public class PlayState extends State {
         batch.setProjectionMatrix(getCombinedCamera());
         batch.begin();
         koopa.render(batch);
-
+        Font.draw(batch, "Score: " + Score, 12, 400);
         for (int i = 0; i < clouds.length; i++) {
             clouds[i].render(batch);
         }
@@ -93,6 +93,7 @@ public class PlayState extends State {
                     && koopa.getX() > clouds[i].getY() + Clouds.WIDTH) {
                 Score++;
                 clouds[i].pass();
+                
             }
         }
         for (int i = 0; i < clouds.length - 1; i++) {
