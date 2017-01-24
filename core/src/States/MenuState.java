@@ -40,7 +40,7 @@ public class MenuState extends State {
         batch.setProjectionMatrix(getCombinedCamera());
         batch.begin();
         batch.draw(BG, 0, 0, getViewWidth(), getViewHeight());
-        Font.draw(batch, " " + HighScore, getViewWidth()/2, getViewHeight() - 100);
+        Font.draw(batch, " " + HighScore, getViewWidth()/4, getViewHeight() - 100);
         batch.draw(Button, getViewWidth() / 2 - Button.getWidth() / 2, getViewHeight() / 2 - (Button.getHeight())/2);
         batch.end();
 
