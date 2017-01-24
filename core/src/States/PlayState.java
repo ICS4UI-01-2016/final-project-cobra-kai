@@ -124,13 +124,9 @@ public class PlayState extends State {
                     y = (int) (Math.random() * ((getArrayY + 140) - (getArrayY + 100) + 1) + (getArrayY + 100));
                     x = -50;
                     while (10.0 > x || x > 400.0) {
-                        int LR = (int) (Math.random() * (2 - 1 + 1) + 1);
-                        if (LR == 1) {
-                            x = (int) (Math.random() * ((getArrayX + (200 + cloudWidth)) - (getArrayX + (100 + cloudWidth)) + 1) + (getArrayX + (100 + cloudWidth)));
-                        }
-                        if (LR == 2) {
-                            x = (int) (Math.random() * ((getArrayX - 100) - (getArrayX - 200) + 1) + (getArrayX - 200));
-                        }
+                        
+                            x = (int) (Math.random() * ((getArrayX + (200 + cloudWidth)) - (getArrayX + (-200)) + 1) + (getArrayX + (-200)));
+                        
                     }
 
                 } else {
@@ -143,11 +139,8 @@ public class PlayState extends State {
                     while (10.0 > x || x > 400.0) {
                         int LR = (int) (Math.random() * (2 - 1 + 1) + 1);
                         if (LR == 1) {
-                            x = (int) (Math.random() * ((getArrayX + (200 + cloudWidth)) - (getArrayX + (100 + cloudWidth)) + 1) + (getArrayX + (100 + cloudWidth)));
-                        }
-                        if (LR == 2) {
-                            x = (int) (Math.random() * ((getArrayX - 100) - (getArrayX - 200) + 1) + (getArrayX - 200));
-                        }
+                            x = (int) (Math.random() * ((getArrayX + (200 + cloudWidth)) - (getArrayX + (-200)) + 1) + (getArrayX + (-200)));
+
                     }
                 }
                 float Motion = (int) (Math.random() * (5 - 1 + 1) + 1);
