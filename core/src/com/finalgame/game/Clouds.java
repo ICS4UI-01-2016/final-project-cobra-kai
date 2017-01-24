@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.math.Vector3;
 
 /**
  *
@@ -15,56 +16,110 @@ import com.badlogic.gdx.math.Vector2;
  */
 public class Clouds {
     //Need to revise
-    private final float PIPE_GAP = 100;
-    private final float MIN_HEIGHT = 50;
-    private final float MAX_HEIGHT = 350;
-    public static final float WIDTH = 52;
-    
+
+    public static final float WIDTH = 128;
     private boolean passed;
-    private Vector2 position;
+    private boolean hitR = false;
+    private boolean hitL = false;
+    private float x;
+    private float y;
+    private Vector3 position;
+    private Vector3 velocity;
     private Texture Cloud;
     private Rectangle CloudBounds;
+    private final float GRAVITY = -3;
+    private final float MOVEMENT1 = 0;
 
-    
-    public Clouds(float y){
-        float x = (int)(Math.random()*(1) + 75);
-        position = new Vector2(x,y);
-        Cloud = new Texture("Cloud.png");
-        
-        
+    public Clouds(float i) {
+        if (i == 10) {
+            y = FinalGame.LENGTH / 4 - 30;
+            x = FinalGame.WIDTH / 4;
+        } else {
+            y = -1000;
+            x = (int) (Math.random() * (400 - 60 + 1) + 60);
+        }
+        position = new Vector3(x, y, 0);
+        Cloud = new Texture("CloudBox.png");
+        velocity = new Vector3(MOVEMENT1, 0, 0);
+
         CloudBounds = new Rectangle(position.x, position.y, Cloud.getWidth(), Cloud.getHeight());
-        
+
         passed = false;
     }
     
-    public void render(SpriteBatch batch){
-        batch.draw(Cloud, position.x, position.y);        
+    public int getWidth(){
+        return Cloud.getWidth();
     }
-    
-    public float getX(){
+
+    public void render(SpriteBatch batch) {
+        batch.draw(Cloud, position.x, position.y);
+    }
+
+    public float getY() {
+        return position.y;
+    }
+
+    public float getX() {
         return position.x;
     }
-    
-    public void setX(float x){
+
+    public void setPos(float x, float y) {
         passed = false;
         position.x = x;
-        float y = (int)(Math.random()*(325-75+1) + 75);
         position.y = y;
-        CloudBounds.setPosition(position.x, position.y + PIPE_GAP/2);
+        CloudBounds.setPosition(position.x, position.y);
     }
-    
 
-    
-    public void dispose(){
+    public boolean collides(KoopaBoi k) {
+        if (CloudBounds.overlaps(k.getHitBox())) {
+            return true;
+        }
+
+        return false;
+    }
+
+    public void update(float deltaTime) {
+        // add gravity
+        position.y = position.y;
+        // set the new bounds
+        CloudBounds.setPosition(position.x, position.y);
+        // scaling velocity by time
+        velocity.scl(deltaTime);
+        // adding velocity to position
+        position.add(velocity);
+        // unscale velocity
+        velocity.scl(1 / deltaTime);
+        
+        if (position.x == 470) {
+            hitR = true;
+            if (hitR = true){
+                velocity.x = -100;
+                if (position.x <=0){
+                    hitR = false;
+                    hitL = true;
+                }
+            }if (hitL = true){
+                velocity.x = 100;
+            }
+        }
+
+        if (position.x == 0) {
+            velocity.x = -100;
+        }
+    }
+
+    public void dispose() {
         Cloud.dispose();
     }
-    
-    public boolean hasPassed(){
+
+    public boolean hasPassed() {
         return passed;
     }
-    
-    public void pass(){
+
+    public void pass() {
         passed = true;
     }
-}
+    
+       
+    }
 

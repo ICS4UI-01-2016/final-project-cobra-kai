@@ -25,8 +25,8 @@ public class MenuState extends State {
 
     public MenuState(StateManager gsm) {
         super(gsm);
-        BG = new Texture("bg.png");
-        Button = new Texture("playbtn.png");
+        BG = new Texture("bg.jpg");
+        Button = new Texture("TheStartButton.png");
         setCameraView(FinalGame.WIDTH, FinalGame.LENGTH);
         setCameraPosition(getViewWidth() / 2, getViewHeight() / 2);
         
@@ -41,7 +41,7 @@ public class MenuState extends State {
         batch.begin();
         batch.draw(BG, 0, 0, getViewWidth(), getViewHeight());
         Font.draw(batch, " " + HighScore, getViewWidth()/2, getViewHeight() - 100);
-        batch.draw(Button, getViewWidth() / 2 - Button.getWidth() / 2, getViewHeight() / 2);
+        batch.draw(Button, getViewWidth() / 2 - Button.getWidth() / 2, getViewHeight() / 2 - (Button.getHeight())/2);
         batch.end();
 
     }

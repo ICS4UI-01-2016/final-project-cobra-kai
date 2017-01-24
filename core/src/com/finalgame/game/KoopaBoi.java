@@ -25,7 +25,7 @@ public class KoopaBoi {
     private Texture death;
     private Texture start;
     private Rectangle hitBox;
-    private final float GRAVITY = -12;
+    private final float GRAVITY = -16;
     private final float MOVEMENT = 0;
 
     public KoopaBoi(int x, int y) {
@@ -37,34 +37,31 @@ public class KoopaBoi {
 
         hitBox = new Rectangle(position.x, position.y, start.getWidth(), start.getHeight());
     }
+    public float getYVelocity(){
+        return velocity.y;
+    }
 
     public void jump() {
-        velocity.y = 500;
+        velocity.y = 530;
     }
 
     public void moveLeft() {
-        // save the current x position
-        float pos = getX();
-        velocity.x = -30;
-        if (position.x == (pos -= 20)){
-            velocity.x = 0;
-        }
-        
+        velocity.x = -220;
     }
 
     public void moveRight() {
-        velocity.x = 30;
-        
-        
+        velocity.x = 220;
     }
+
+    public void standStill() {
+        velocity.x = 0;
+    }
+    
 
     public void update(float deltaTime) {
         // add gravity
         if (position.y >= 0) {
             velocity.y += GRAVITY;
-        if (position.x >= 1000) {
-            position.x -= 1000;
-        }    
         } else {
             velocity.y = 0;
             velocity.x = 0;
@@ -79,11 +76,22 @@ public class KoopaBoi {
         // unscale velocity
         velocity.scl(1 / deltaTime);
 
+        if (position.x >= 470) {
+            position.x = 5;
+        }
+
+        if (position.x <= 0) {
+            position.x = 460;
+        }
+
+        System.out.println(position.y);
+
         // set the new bounds
         hitBox.setPosition(position.x, position.y);
     }
 
     public void render(SpriteBatch batch) {
+
         if (position.y > 0) {
             batch.draw(start, position.x, position.y);
         }
@@ -91,16 +99,10 @@ public class KoopaBoi {
             start.dispose();
             batch.draw(death, position.x, position.y);
         }
-        if (position.x >= 1000) {
-            batch.draw(start, 0, position.y);
-        }
-
-
-
 
     }
-    
-    public float setX(float NewX){
+
+    public float setX(float NewX) {
         position.x = NewX;
         return position.x;
     }
