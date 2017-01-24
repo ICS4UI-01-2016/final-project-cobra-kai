@@ -39,7 +39,7 @@ public class KoopaBoi {
     }
 
     public void jump() {
-        velocity.y = 320;
+        velocity.y = 520;
     }
 
     public void moveLeft() {

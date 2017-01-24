@@ -56,7 +56,7 @@ public class PlayState extends State {
         batch.setProjectionMatrix(getCombinedCamera());
         batch.begin();
         koopa.render(batch);
-        Font.draw(batch, "Score: " + Score, 12, 400);
+        Font.draw(batch, "Score: " + Score, 12, koopa.getY() + 120);
         for (int i = 0; i < clouds.length; i++) {
             clouds[i].render(batch);
         }
@@ -66,6 +66,7 @@ public class PlayState extends State {
     @Override
     public void update(float deltaTime) {
         koopa.update(deltaTime);
+        moveCameraY(koopa.getY());
         for (int i = 0; i < clouds.length; i++) {
             clouds[i].update();
         }
@@ -97,7 +98,7 @@ public class PlayState extends State {
             }
         }
         for (int i = 0; i < clouds.length - 1; i++) {
-            if (clouds[i].getY() <= -30) {
+            if (clouds[i].getY() <= koopa.getY() - 300) {
                 if (i == 0) {
                     y = (int) (Math.random() * ((clouds[9].getY() + 140) - (clouds[9].getY() + 100) + 1) + (clouds[9].getY() + 100));
                     x = -50;
