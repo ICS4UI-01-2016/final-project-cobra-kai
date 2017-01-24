@@ -21,6 +21,7 @@ public class MenuState extends State {
     private Texture GBG;
     private Texture BG;
     private Texture Button;
+    private Texture Logo;
     private int HighScore;
     private BitmapFont Font;
 
@@ -28,6 +29,7 @@ public class MenuState extends State {
         super(gsm);
         GBG = new Texture("Background.jpg");
         Button = new Texture("TheStartButton.png");
+        Logo = new Texture("KoopaBOIlogo.png");
         setCameraView(FinalGame.WIDTH, FinalGame.LENGTH);
         setCameraPosition(getViewWidth() / 2, getViewHeight() / 2);
         
@@ -41,8 +43,9 @@ public class MenuState extends State {
         batch.setProjectionMatrix(getCombinedCamera());
         batch.begin();
         batch.draw(GBG, 0, 0, getViewWidth(), getViewHeight());
-        Font.draw(batch, "HighScore: " + HighScore, getViewWidth()/2 - 50, getViewHeight() -100);
+        Font.draw(batch, "HighScore: " + HighScore, getViewWidth()/12 - 50, getViewHeight() - 800);
         batch.draw(Button, getViewWidth() / 2 - Button.getWidth() / 2, getViewHeight() / 2 - (Button.getHeight())/2);
+        batch.draw(Logo, getViewWidth() / 2 - Logo.getWidth() / 2, getViewHeight() -100 - (Logo.getHeight())/2);
         batch.end();
 
     }

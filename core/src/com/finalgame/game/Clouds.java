@@ -21,11 +21,13 @@ public class Clouds {
     private boolean passed;
     private boolean hitR = false;
     private boolean hitL = false;
+    private boolean isBroken = false;
     private float x;
     private float y;
     private Vector3 position;
     private Vector3 velocity;
     private Texture Cloud;
+    private Texture BrokenCloud;
     private Rectangle CloudBounds;
     private float Motion;
     private final float MOVEMENT1 = 0;
@@ -41,19 +43,30 @@ public class Clouds {
         }
         position = new Vector3(x, y, 0);
         Cloud = new Texture("CloudBox.png");
+        BrokenCloud = new Texture("BrokenCloudBox.png");
         velocity = new Vector3(MOVEMENT1, 0, 0);
 
         CloudBounds = new Rectangle(position.x, position.y, Cloud.getWidth(), Cloud.getHeight());
 
         passed = false;
     }
-    
-    public int getWidth(){
+
+    public int getWidth() {
         return Cloud.getWidth();
     }
 
     public void render(SpriteBatch batch) {
         batch.draw(Cloud, position.x, position.y);
+    }
+
+    public void brokenRender(SpriteBatch batch) {
+        batch.draw(BrokenCloud, position.x, position.y);
+    }
+    public void setBroken(boolean TF){
+        isBroken = TF;
+    }
+    public boolean isBroken(){
+        return isBroken;
     }
 
     public float getY() {
@@ -86,16 +99,17 @@ public class Clouds {
         position.add(velocity);
         // unscale velocity
         velocity.scl(1 / deltaTime);
-        
+
         if (position.x == 470) {
             hitR = true;
-            if (hitR = true){
+            if (hitR = true) {
                 velocity.x = -100;
-                if (position.x <=0){
+                if (position.x <= 0) {
                     hitR = false;
                     hitL = true;
                 }
-            }if (hitL = true){
+            }
+            if (hitL = true) {
                 velocity.x = 100;
             }
         }
@@ -104,18 +118,18 @@ public class Clouds {
             velocity.x = -100;
         }
     }
-    public void setMotion(float m){
+
+    public void setMotion(float m) {
         Motion = m;
     }
-    
-    public void sideMotion(float x){
-        
-        
+
+    public void sideMotion(float x) {
+
         // add gravity
-        if(x < 10){
+        if (x < 10) {
             Motion = Motion * -1;
-        } 
-        if(x > 400){
+        }
+        if (x > 400) {
             Motion = Motion * -1;
         }
         position.x = position.x + Motion;
@@ -134,7 +148,5 @@ public class Clouds {
     public void pass() {
         passed = true;
     }
-    
-       
-    }
 
+}

@@ -41,9 +41,9 @@ public class PlayState extends State {
         super(stm);
         setCameraView(FinalGame.WIDTH / 2, FinalGame.LENGTH / 2);
         koopa = new KoopaBoi(FinalGame.WIDTH / 4, FinalGame.LENGTH / 4);
-        
-        BG = new Texture ("bg.jpg");
-        GBG = new Texture ("Background.jpg");
+
+        BG = new Texture("bg.jpg");
+        GBG = new Texture("Background.jpg");
         moveCameraY(koopa.getY());
         //If you change the size of the clouds array, you must also scale the exception where the clouds are generated in Clouds.java
         clouds = new Clouds[11];
@@ -60,11 +60,14 @@ public class PlayState extends State {
     public void render(SpriteBatch batch) {
         batch.setProjectionMatrix(getCombinedCamera());
         batch.begin();
-
         batch.draw(GBG, 0, koopa.getY() - 212, getViewWidth(), getViewHeight());
         koopa.render(batch);
         for (int i = 0; i < clouds.length; i++) {
-            clouds[i].render(batch);
+            if (clouds[i].isBroken() == false) {
+                clouds[i].render(batch);
+            } else {
+                clouds[i].brokenRender(batch);
+            }
         }
         Font.draw(batch, "Score: " + Score, 12, koopa.getY() + 200);
         batch.end();
@@ -73,7 +76,7 @@ public class PlayState extends State {
     @Override
     public void update(float deltaTime) {
         //The start cloud should 'despawn' (it just moves it far away so the player can't land on it)
-        if (koopa.getY()- 400 >= clouds[clouds.length - 1].getY()) {
+        if (koopa.getY() - 400 >= clouds[clouds.length - 1].getY()) {
             clouds[clouds.length - 1].setPos(1100, -1100);
         }
         koopa.update(deltaTime);
@@ -116,6 +119,7 @@ public class PlayState extends State {
         }
         for (int i = 0; i < clouds.length - 1; i++) {
             if (clouds[i].getY() <= koopa.getY() - 400) {
+                clouds[i].setBroken(false);
                 float cloudWidth = clouds[0].getWidth();
                 if (i == 0) {
                     float getArrayX = clouds[clouds.length - 2].getX();
@@ -124,9 +128,13 @@ public class PlayState extends State {
                     y = (int) (Math.random() * ((getArrayY + 140) - (getArrayY + 100) + 1) + (getArrayY + 100));
                     x = -50;
                     while (10.0 > x || x > 400.0) {
-                        
-                            x = (int) (Math.random() * ((getArrayX + (200 + cloudWidth)) - (getArrayX + (-200)) + 1) + (getArrayX + (-200)));
-                        
+                        int LR = (int) (Math.random() * (2 - 1 + 1) + 1);
+                        if (LR == 1) {
+                            x = (int) (Math.random() * ((getArrayX + (200 + cloudWidth)) - (getArrayX + (100 + cloudWidth)) + 1) + (getArrayX + (100 + cloudWidth)));
+                        }
+                        if (LR == 2) {
+                            x = (int) (Math.random() * ((getArrayX - 100) - (getArrayX - 200) + 1) + (getArrayX - 200));
+                        }
                     }
 
                 } else {
@@ -139,15 +147,21 @@ public class PlayState extends State {
                     while (10.0 > x || x > 400.0) {
                         int LR = (int) (Math.random() * (2 - 1 + 1) + 1);
                         if (LR == 1) {
-                            x = (int) (Math.random() * ((getArrayX + (200 + cloudWidth)) - (getArrayX + (-200)) + 1) + (getArrayX + (-200)));
-
+                            x = (int) (Math.random() * ((getArrayX + (200 + cloudWidth)) - (getArrayX + (100 + cloudWidth)) + 1) + (getArrayX + (100 + cloudWidth)));
+                        }
+                        if (LR == 2) {
+                            x = (int) (Math.random() * ((getArrayX - 100) - (getArrayX - 200) + 1) + (getArrayX - 200));
+                        }
                     }
                 }
                 float Motion = (int) (Math.random() * (5 - 1 + 1) + 1);
+                float RandBroken = (int) (Math.random() * (10 - 1 + 1) + 1);
+                if(RandBroken == 1){
+                clouds[i].setBroken(true);
+                }
                 clouds[i].setMotion(Motion);
                 clouds[i].setPos(x, y);
             }
-        }
         }
 
         for (int i = 0; i < clouds.length; i++) {
@@ -155,6 +169,9 @@ public class PlayState extends State {
                 if (koopa.getYVelocity() <= 0) {
                     if (clouds[i].collides(koopa)) {
                         koopa.jump();
+                        if(clouds[i].isBroken() == true){
+                            clouds[i].setPos(12000, clouds[i].getY());
+                        }
                         //end the game
                         //StateManager GSM = getStateManager();
                         //pop off 
