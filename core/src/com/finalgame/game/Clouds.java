@@ -25,7 +25,7 @@ public class Clouds {
     private Vector3 velocity;
     private Texture Cloud;
     private Rectangle CloudBounds;
-    private final float GRAVITY = -4;
+    private final float GRAVITY = -3;
     private final float MOVEMENT1 = 0;
 
     public Clouds(float i) {

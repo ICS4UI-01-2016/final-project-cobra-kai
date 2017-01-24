@@ -25,7 +25,7 @@ public class KoopaBoi {
     private Texture death;
     private Texture start;
     private Rectangle hitBox;
-    private final float GRAVITY = -12;
+    private final float GRAVITY = -16;
     private final float MOVEMENT = 0;
 
     public KoopaBoi(int x, int y) {
@@ -43,11 +43,11 @@ public class KoopaBoi {
     }
 
     public void moveLeft() {
-        velocity.x = -130;
+        velocity.x = -180;
     }
     
     public void moveRight() {
-        velocity.x = 130;
+        velocity.x = 180;
     }
     public void standStill(){
         velocity.x = 0;
