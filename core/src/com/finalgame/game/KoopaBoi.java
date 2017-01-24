@@ -64,6 +64,10 @@ public class KoopaBoi {
             velocity.y += GRAVITY;
         } else {
             velocity.y = 0;
+            velocity.x = 0;
+        }
+        if (position.x >= 1000) {
+            position.x -= 1000;
         }
         // scaling velocity by time
         velocity.scl(deltaTime);
