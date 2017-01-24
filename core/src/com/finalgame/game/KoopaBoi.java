@@ -91,13 +91,13 @@ public class KoopaBoi {
 
     public void render(SpriteBatch batch) {
         // save the current position
-        if (velocity.x == 0 || velocity.x == 220) {
+        if (velocity.x == 0 || velocity.x >= 220) {
             batch.draw(start, position.x, position.y);
         }
         if (position.y <= 0) {
             start.dispose();
             batch.draw(death, position.x, position.y);
-        }if (velocity.x == -220){
+        }if (velocity.x <= -220){
             batch.draw(left, position.x, position.y);
         }
 
