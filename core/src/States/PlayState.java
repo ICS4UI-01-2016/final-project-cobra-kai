@@ -18,7 +18,7 @@ import com.finalgame.game.KoopaBoi;
 
 /**
  *
- * @author lamon
+ * @author coulh9904
  */
 public class PlayState extends State {
 
@@ -69,10 +69,11 @@ public class PlayState extends State {
         for (int i = 0; i < clouds.length; i++) {
             clouds[i].update();
         }
-        if (koopa.getY() <= -12) {
+        if (koopa.getY() <= 0) {
             // end the game
             StateManager gsm = getStateManager();
             // pop off the game screen to go to menu
+            gsm.pop();
 
         }
 
@@ -98,23 +99,24 @@ public class PlayState extends State {
             if (clouds[i].getY() <= -30) {
                 if (i == 0) {
                     y = (int) (Math.random() * ((clouds[9].getY() + 140) - (clouds[9].getY() + 100) + 1) + (clouds[9].getY() + 100));
-                    while (10.0 > x || x > 440.0) {
+                    x = -50;
+                    while (10.0 > x || x > 400.0) {
                     int LR = (int) (Math.random() * (2 - 1 + 1) + 1);
                         if(LR == 1){
                         x = (int) (Math.random() * ((clouds[clouds.length - 2].getX() + 160) - (clouds[clouds.length - 2].getX() + 120) + 1) + (clouds[9].getX() + 120));
                         }
                         if(LR == 2){
-                        x = (int) (Math.random() * ((clouds[clouds.length - 2].getX() - 120) - (clouds[clouds.length - 2].getX() - 170) + 1) + (clouds[9].getX() - 170));
+                        x = (int) (Math.random() * ((clouds[clouds.length - 2].getX() - 120) - (clouds[clouds.length - 2].getX() - 160) + 1) + (clouds[9].getX() - 160));
                         }
                     }
-                    System.out.println("SX " + i + " " + x);
+                    System.out.println("SX " + i + " " + x + " 9: " + (clouds[clouds.length - 2]));
                     System.out.println("SY " + i  + " " + y);
                 } else {
 
                     y = (int) (Math.random() * ((clouds[i - 1].getY() + 140) - (clouds[i - 1].getY() + 100) + 1) + (clouds[i - 1].getY() + 100));
                     System.out.println("Y " + y);
                     x = -50;
-                    while (10.0 > x || x > 440.0) {
+                    while (10.0 > x || x > 400.0) {
                         int LR = (int) (Math.random() * (2 - 1 + 1) + 1);
                         if(LR == 1){
                         x = (int) (Math.random() * ((clouds[i - 1].getX() + 160) - (clouds[i - 1].getX() + 120) + 1) + (clouds[i - 1].getX() + 120));
