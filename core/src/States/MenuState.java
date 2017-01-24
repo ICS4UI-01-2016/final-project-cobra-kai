@@ -41,7 +41,7 @@ public class MenuState extends State {
         batch.setProjectionMatrix(getCombinedCamera());
         batch.begin();
         batch.draw(GBG, 0, 0, getViewWidth(), getViewHeight());
-        Font.draw(batch, " " + HighScore, getViewWidth()/2, getViewHeight() - 100);
+        Font.draw(batch, "HighScore: " + HighScore, getViewWidth()/2 - 50, getViewHeight() -100);
         batch.draw(Button, getViewWidth() / 2 - Button.getWidth() / 2, getViewHeight() / 2 - (Button.getHeight())/2);
         batch.end();
 
@@ -64,7 +64,7 @@ public class MenuState extends State {
             unproject(touch);
             //check if button is pressed
             float buttonX = getViewWidth() / 2 - Button.getWidth() / 2;
-            float buttonY = getViewHeight() / 2;
+            float buttonY = getViewHeight() / 2 - (Button.getHeight())/2;
             if(touch.x > buttonX && touch.x < buttonX + Button.getWidth()
                     && touch.y > buttonY && touch.y < buttonY + Button.getHeight()){
                 StateManager GSM = getStateManager();

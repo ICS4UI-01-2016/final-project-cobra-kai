@@ -61,23 +61,22 @@ public class PlayState extends State {
         batch.begin();
         batch.draw(BG, 0, koopa.getY() - 212, getViewWidth(), getViewHeight());
         koopa.render(batch);
-        Font.draw(batch, "Score: " + Score, 12, koopa.getY() + 120);
         for (int i = 0; i < clouds.length; i++) {
             clouds[i].render(batch);
         }
+        Font.draw(batch, "Score: " + Score, 12, koopa.getY() + 200);
         batch.end();
     }
 
     @Override
     public void update(float deltaTime) {
-        
         koopa.update(deltaTime);
         moveCameraY(koopa.getY());
         for (int i = 0; i < clouds.length; i++) {
             clouds[i].update(deltaTime);
             
         }
-        if (koopa.getY() <= 0) {
+        if (koopa.getY() <= Score - 1000 || koopa.getY() <= 0) {
             // end the game
             StateManager gsm = getStateManager();
             
@@ -107,6 +106,7 @@ public class PlayState extends State {
                 clouds[i].pass();
 
             }
+            clouds[i].sideMotion(clouds[i].getX());
         }
         for (int i = 0; i < clouds.length - 1; i++) {
             if (clouds[i].getY() <= koopa.getY() - 300) {
@@ -144,7 +144,8 @@ public class PlayState extends State {
                         }
                     }
                 }
-                
+                float Motion = (int) (Math.random() * (5 - 1 + 1) + 1);
+                clouds[i].setMotion(Motion);
                 clouds[i].setPos(x, y);
             }
         }
@@ -162,7 +163,6 @@ public class PlayState extends State {
                 }
             }
         }     
-
     }
 
     @Override
