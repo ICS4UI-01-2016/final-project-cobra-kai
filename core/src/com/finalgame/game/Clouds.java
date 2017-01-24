@@ -27,7 +27,7 @@ public class Clouds {
     private Vector3 velocity;
     private Texture Cloud;
     private Rectangle CloudBounds;
-    private final float GRAVITY = -3;
+    private float Motion;
     private final float MOVEMENT1 = 0;
 
     public Clouds(float i) {
@@ -79,10 +79,6 @@ public class Clouds {
     }
 
     public void update(float deltaTime) {
-        // add gravity
-        position.y = position.y;
-        // set the new bounds
-        CloudBounds.setPosition(position.x, position.y);
         // scaling velocity by time
         velocity.scl(deltaTime);
         // adding velocity to position
@@ -106,6 +102,24 @@ public class Clouds {
         if (position.x == 0) {
             velocity.x = -100;
         }
+    }
+    public void setMotion(float m){
+        Motion = m;
+    }
+    
+    public void sideMotion(float x){
+        
+        
+        // add gravity
+        if(x < 10){
+            Motion = Motion * -1;
+        } 
+        if(x > 400){
+            Motion = Motion * -1;
+        }
+        position.x = position.x + Motion;
+        // set the new bounds
+        CloudBounds.setPosition(position.x, position.y);
     }
 
     public void dispose() {
