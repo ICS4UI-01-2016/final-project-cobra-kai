@@ -23,6 +23,7 @@ import com.finalgame.game.KoopaBoi;
 public class PlayState extends State {
 
     private KoopaBoi koopa;
+    private Texture GBG;
     private Texture BG;
     private Texture ground;
     private Clouds[] clouds;
@@ -40,8 +41,9 @@ public class PlayState extends State {
         super(stm);
         setCameraView(FinalGame.WIDTH / 2, FinalGame.LENGTH / 2);
         koopa = new KoopaBoi(FinalGame.WIDTH / 4, FinalGame.LENGTH / 4);
+        
         BG = new Texture ("bg.jpg");
-        ground = new Texture ("ground.jpg");
+        GBG = new Texture ("Background.jpg");
         moveCameraY(koopa.getY());
         //If you change the size of the clouds array, you must also scale the exception where the clouds are generated in Clouds.java
         clouds = new Clouds[11];
