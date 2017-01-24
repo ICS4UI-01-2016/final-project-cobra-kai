@@ -90,4 +90,8 @@ public class Clouds {
     public void pass() {
         passed = true;
     }
+    
+    public void velocity(){
+        
+    }
 }

@@ -23,7 +23,7 @@ import com.finalgame.game.KoopaBoi;
 public class PlayState extends State {
 
     private KoopaBoi koopa;
-    private Texture bg;
+    private Texture BG;
     private Clouds[] clouds;
     private float y;
     private float x;
@@ -39,6 +39,7 @@ public class PlayState extends State {
         super(stm);
         setCameraView(FinalGame.WIDTH / 2, FinalGame.LENGTH / 2);
         koopa = new KoopaBoi(FinalGame.WIDTH / 4, FinalGame.LENGTH / 4);
+        BG = new Texture ("bg.jpg");
         moveCameraY(koopa.getY());
         //If you change the size of the clouds array, you must also scale the exception where the clouds are generated in Clouds.java
         clouds = new Clouds[11];
@@ -55,6 +56,7 @@ public class PlayState extends State {
     public void render(SpriteBatch batch) {
         batch.setProjectionMatrix(getCombinedCamera());
         batch.begin();
+        batch.draw(BG, 0, 0, getViewWidth(), getViewHeight());
         koopa.render(batch);
         Font.draw(batch, "Score: " + Score, 12, koopa.getY() + 120);
         for (int i = 0; i < clouds.length; i++) {
@@ -79,6 +81,7 @@ public class PlayState extends State {
             gsm.pop();
 
         }
+        
 
         //did the bird hit the pipe?
         for (int i = 0; i < clouds.length; i++) {
