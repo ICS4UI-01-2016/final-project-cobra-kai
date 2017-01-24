@@ -135,6 +135,7 @@ public class PlayState extends State {
                         System.out.println("X " + i + " " + x + " " + LR + " " + clouds[i - 1].getX());
                     }
                 }
+                
                 clouds[i].setPos(x, y);
             }
         }
