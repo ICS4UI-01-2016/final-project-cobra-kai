@@ -57,7 +57,7 @@ public class PlayState extends State {
         batch.begin();
         koopa.render(batch);
 
-        for (int i = 0; i < clouds.length - 1; i++) {
+        for (int i = 0; i < clouds.length; i++) {
             clouds[i].render(batch);
         }
         batch.end();
@@ -66,7 +66,7 @@ public class PlayState extends State {
     @Override
     public void update(float deltaTime) {
         koopa.update(deltaTime);
-        for (int i = 0; i < clouds.length - 1; i++) {
+        for (int i = 0; i < clouds.length; i++) {
             clouds[i].update();
         }
         if (koopa.getY() <= -12) {
@@ -77,7 +77,7 @@ public class PlayState extends State {
         }
 
         //did the bird hit the pipe?
-        for (int i = 0; i < clouds.length - 1; i++) {
+        for (int i = 0; i < clouds.length; i++) {
             if (clouds[i].collides(koopa)) {
                 //Get current highscore
                 Preferences Pref = Gdx.app.getPreferences("HighScore");
@@ -98,10 +98,10 @@ public class PlayState extends State {
             if (clouds[i].getY() <= -30) {
                 if (i == 0) {
                     y = (int) (Math.random() * ((clouds[9].getY() + 140) - (clouds[9].getY() + 100) + 1) + (clouds[9].getY() + 100));
-                    while (10.0 > x || x > 460.0) {
+                    while (10.0 > x || x > 440.0) {
                     int LR = (int) (Math.random() * (2 - 1 + 1) + 1);
                         if(LR == 1){
-                        x = (int) (Math.random() * ((clouds[clouds.length - 2].getX() + 170) - (clouds[clouds.length - 2].getX() + 120) + 1) + (clouds[9].getX() + 120));
+                        x = (int) (Math.random() * ((clouds[clouds.length - 2].getX() + 160) - (clouds[clouds.length - 2].getX() + 120) + 1) + (clouds[9].getX() + 120));
                         }
                         if(LR == 2){
                         x = (int) (Math.random() * ((clouds[clouds.length - 2].getX() - 120) - (clouds[clouds.length - 2].getX() - 170) + 1) + (clouds[9].getX() - 170));
@@ -114,13 +114,13 @@ public class PlayState extends State {
                     y = (int) (Math.random() * ((clouds[i - 1].getY() + 140) - (clouds[i - 1].getY() + 100) + 1) + (clouds[i - 1].getY() + 100));
                     System.out.println("Y " + y);
                     x = -50;
-                    while (10.0 > x || x > 460.0) {
+                    while (10.0 > x || x > 440.0) {
                         int LR = (int) (Math.random() * (2 - 1 + 1) + 1);
                         if(LR == 1){
                         x = (int) (Math.random() * ((clouds[i - 1].getX() + 160) - (clouds[i - 1].getX() + 120) + 1) + (clouds[i - 1].getX() + 120));
                         }
                         if(LR == 2){
-                        x = (int) (Math.random() * ((clouds[i - 1].getX() - 120) - (clouds[i - 1].getX() - 170) + 1) + (clouds[i - 1].getX() - 170));
+                        x = (int) (Math.random() * ((clouds[i - 1].getX() - 120) - (clouds[i - 1].getX() - 160) + 1) + (clouds[i - 1].getX() - 160));
                         }
                         
                         System.out.println("X " + i + " " + x + " " + LR + " " + clouds[i - 1].getX());
