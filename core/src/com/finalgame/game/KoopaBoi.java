@@ -37,9 +37,12 @@ public class KoopaBoi {
 
         hitBox = new Rectangle(position.x, position.y, start.getWidth(), start.getHeight());
     }
+    public float getYVelocity(){
+        return velocity.y;
+    }
 
     public void jump() {
-        velocity.y = 520;
+        velocity.y = 530;
     }
 
     public void moveLeft() {
@@ -53,6 +56,7 @@ public class KoopaBoi {
     public void standStill() {
         velocity.x = 0;
     }
+    
 
     public void update(float deltaTime) {
         // add gravity

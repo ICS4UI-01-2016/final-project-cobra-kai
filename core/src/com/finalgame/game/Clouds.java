@@ -19,6 +19,8 @@ public class Clouds {
 
     public static final float WIDTH = 128;
     private boolean passed;
+    private boolean hitR = false;
+    private boolean hitL = false;
     private float x;
     private float y;
     private Vector3 position;
@@ -43,6 +45,10 @@ public class Clouds {
         CloudBounds = new Rectangle(position.x, position.y, Cloud.getWidth(), Cloud.getHeight());
 
         passed = false;
+    }
+    
+    public int getWidth(){
+        return Cloud.getWidth();
     }
 
     public void render(SpriteBatch batch) {
@@ -72,11 +78,34 @@ public class Clouds {
         return false;
     }
 
-    public void update() {
+    public void update(float deltaTime) {
         // add gravity
         position.y = position.y;
         // set the new bounds
         CloudBounds.setPosition(position.x, position.y);
+        // scaling velocity by time
+        velocity.scl(deltaTime);
+        // adding velocity to position
+        position.add(velocity);
+        // unscale velocity
+        velocity.scl(1 / deltaTime);
+        
+        if (position.x == 470) {
+            hitR = true;
+            if (hitR = true){
+                velocity.x = -100;
+                if (position.x <=0){
+                    hitR = false;
+                    hitL = true;
+                }
+            }if (hitL = true){
+                velocity.x = 100;
+            }
+        }
+
+        if (position.x == 0) {
+            velocity.x = -100;
+        }
     }
 
     public void dispose() {
@@ -91,7 +120,6 @@ public class Clouds {
         passed = true;
     }
     
-    public void velocity(){
-        
+       
     }
-}
+
