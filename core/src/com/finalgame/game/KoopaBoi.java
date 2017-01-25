@@ -46,6 +46,9 @@ public class KoopaBoi {
     public void jump() {
         velocity.y = 530;
     }
+    public void superJump(){
+        velocity.y = 800;
+    }
 
     public void moveLeft() {
         velocity.x = -220;
@@ -108,7 +111,7 @@ public class KoopaBoi {
     }
 
     public void render(SpriteBatch batch) {
-        // save the current position
+        // if the koopa is moving right (+ velocity) or not moving
         if (velocity.x == 0 || velocity.x >= 220) {
             batch.draw(start, position.x, position.y);
         }
@@ -116,6 +119,7 @@ public class KoopaBoi {
             start.dispose();
             batch.draw(death, position.x, position.y);
         }
+        // if the koopa is moving left (- velocity)
         if (velocity.x <= -220) {
             batch.draw(left, position.x, position.y);
         }
