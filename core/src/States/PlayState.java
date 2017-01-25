@@ -30,6 +30,7 @@ public class PlayState extends State {
     private float y;
     private float x;
     private int Score;
+    private float Pause = 100;
     private BitmapFont Font;
     private boolean right = false;
     private boolean left = false;
@@ -84,6 +85,12 @@ public class PlayState extends State {
         for (int i = 0; i < clouds.length; i++) {
             clouds[i].update(deltaTime);
 
+        }
+        while (Pause == -100) {
+            System.out.println("Kill yuorself");
+            if (Gdx.input.isKeyPressed(Input.Keys.L) == true) {
+                Pause = Pause * -1;
+            }
         }
         if (koopa.getY() <= Score - 1000 || koopa.getY() <= 0) {
             // end the game
@@ -154,8 +161,8 @@ public class PlayState extends State {
                 }
                 float Motion = (int) (Math.random() * (5 - 1 + 1) + 1);
                 float RandBroken = (int) (Math.random() * (4 - 1 + 1) + 1);
-                if(RandBroken == 1){
-                clouds[i].setBroken(true);
+                if (RandBroken == 1) {
+                    clouds[i].setBroken(true);
                 }
                 clouds[i].setMotion(Motion);
                 clouds[i].setPos(x, y);
@@ -167,7 +174,7 @@ public class PlayState extends State {
                 if (koopa.getYVelocity() <= 0) {
                     if (clouds[i].collides(koopa)) {
                         koopa.jump();
-                        if(clouds[i].isBroken() == true){
+                        if (clouds[i].isBroken() == true) {
                             clouds[i].setPos(12000, clouds[i].getY());
                         }
                     }
@@ -192,6 +199,9 @@ public class PlayState extends State {
         if (Gdx.input.isKeyPressed(DPAD_LEFT) == true) {
 
             koopa.moveLeft();
+        }
+        if (Gdx.input.isKeyPressed(Input.Keys.P) == true) {
+            Pause = Pause * -1;
         }
     }
 
