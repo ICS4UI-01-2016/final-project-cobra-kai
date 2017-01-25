@@ -87,7 +87,7 @@ public class PlayState extends State {
 
         }
         while (Pause == -100) {
-            System.out.println("Kill yuorself");
+            System.out.println("Kill yourself");
             if (Gdx.input.isKeyPressed(Input.Keys.L) == true) {
                 Pause = Pause * -1;
             }
