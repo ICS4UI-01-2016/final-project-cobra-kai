@@ -36,7 +36,7 @@ public class EndState extends State {
         ground = new Texture("ground.jpg");
         Back = new Texture ("back.jpg");
         koopa = new KoopaBoi(300, FinalGame.LENGTH / 2);
-        
+        //Score = PlayState.getScore();
         setCameraView(FinalGame.WIDTH /2 , FinalGame.LENGTH /2 );
         setCameraPosition(getViewWidth() / 2, getViewHeight() / 2);
 

@@ -31,7 +31,7 @@ public class PlayState extends State {
     private float x;
     private float getArrayX;
     private float getArrayY;
-    public int Score;
+    private int Score;
     //Pause is 100. Pressing P multiplies 100 by -1, which triggers the Pause if statement that encoumpasses update. Prevents update from running until P is pressed again, essentially pausing the game.
     private float Pause = 100;
     private BitmapFont Font;
