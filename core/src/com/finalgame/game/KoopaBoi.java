@@ -109,6 +109,29 @@ public class KoopaBoi {
         }
         hitBox.setPosition(position.x, position.y);
     }
+    
+    public void endRender (SpriteBatch batch){
+        // if the koopa is not on the ground render the start image
+        if (position.y >95 ){
+            batch.draw(start, position.x, position.y);
+        }
+        if (position.y <= 95){
+            
+            
+            batch.draw(death, position.x, position.y);
+        }
+    }
+    public void endUpdate (float deltaTime){
+        if (position.y > 95){
+            position.y += GRAVITY;
+        }
+        // scaling velocity by time
+        velocity.scl(deltaTime);
+        // adding velocity to position
+        position.add(velocity);
+        // unscale velocity
+        velocity.scl(1 / deltaTime);
+    }
 
     public void render(SpriteBatch batch) {
         // if the koopa is moving right (+ velocity) or not moving

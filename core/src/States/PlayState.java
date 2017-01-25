@@ -107,13 +107,12 @@ public class PlayState extends State {
             }
 
             if (koopa.getY() <= Score - 1000 || koopa.getY() <= 0) {
-                for (int i = 0; i < clouds.length; i++) {
-
-                }
+                
                 // end the game
-                StateManager gsm = getStateManager();
+                
                 // pop off the game screen to go to menu
-                gsm.pop();
+                StateManager GSM = getStateManager();
+                GSM.push(new EndState(GSM));
 
             }
             // the score is the highest y pos the koopa reaches
@@ -223,6 +222,9 @@ public class PlayState extends State {
         if (Gdx.input.isKeyJustPressed(Input.Keys.P) == true) {
             Pause = Pause * -1;
         }
+    }
+    public int getScore(){
+        return Score;
     }
 
     @Override
