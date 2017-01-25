@@ -88,10 +88,8 @@ public class PlayState extends State {
         if (koopa.getY() <= Score - 1000 || koopa.getY() <= 0) {
             // end the game
             StateManager gsm = getStateManager();
-
             // pop off the game screen to go to menu
             gsm.pop();
-
         }
 
         if (koopa.getY() >= Score) {
@@ -155,7 +153,7 @@ public class PlayState extends State {
                     }
                 }
                 float Motion = (int) (Math.random() * (5 - 1 + 1) + 1);
-                float RandBroken = (int) (Math.random() * (10 - 1 + 1) + 1);
+                float RandBroken = (int) (Math.random() * (4 - 1 + 1) + 1);
                 if(RandBroken == 1){
                 clouds[i].setBroken(true);
                 }
@@ -172,10 +170,6 @@ public class PlayState extends State {
                         if(clouds[i].isBroken() == true){
                             clouds[i].setPos(12000, clouds[i].getY());
                         }
-                        //end the game
-                        //StateManager GSM = getStateManager();
-                        //pop off 
-                        //GSM.pop();
                     }
                 }
             }

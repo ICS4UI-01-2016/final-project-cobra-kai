@@ -38,7 +38,8 @@ public class KoopaBoi {
 
         hitBox = new Rectangle(position.x, position.y, start.getWidth(), start.getHeight());
     }
-    public float getYVelocity(){
+
+    public float getYVelocity() {
         return velocity.y;
     }
 
@@ -57,7 +58,6 @@ public class KoopaBoi {
     public void standStill() {
         velocity.x = 0;
     }
-    
 
     public void update(float deltaTime) {
         // add gravity
@@ -67,7 +67,7 @@ public class KoopaBoi {
             velocity.y = 0;
             velocity.x = 0;
         }
-        
+
         // scaling velocity by time
         velocity.scl(deltaTime);
         // adding velocity to position
@@ -89,6 +89,24 @@ public class KoopaBoi {
         hitBox.setPosition(position.x, position.y);
     }
 
+    public void InfoStateUpdate(float deltaTime, float KoopaStart) {
+        // scaling velocity by time
+        velocity.scl(deltaTime);
+        // adding velocity to position
+        position.add(velocity);
+        // unscale velocity
+        velocity.scl(1 / deltaTime);
+
+        if (position.x > KoopaStart + 110) {
+            position.x = KoopaStart + 110;
+        }
+
+        if (position.x < KoopaStart - 100) {
+            position.x = KoopaStart - 100;
+        }
+        hitBox.setPosition(position.x, position.y);
+    }
+
     public void render(SpriteBatch batch) {
         // save the current position
         if (velocity.x == 0 || velocity.x >= 220) {
@@ -97,7 +115,8 @@ public class KoopaBoi {
         if (position.y <= 0) {
             start.dispose();
             batch.draw(death, position.x, position.y);
-        }if (velocity.x <= -220){
+        }
+        if (velocity.x <= -220) {
             batch.draw(left, position.x, position.y);
         }
 
