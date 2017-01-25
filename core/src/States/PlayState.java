@@ -91,8 +91,8 @@ public class PlayState extends State {
         //Pause here will activte/deactivate as P is pressed. 
         if (Pause == 100) {
             //This little if statement gives you one SuperJump power - up every 1000 y coords.
-            if (Score >= ScoreTrack + 2000) {
-                ScoreTrack = ScoreTrack + 2000;
+            if (Score >= ScoreTrack + 4000) {
+                ScoreTrack = ScoreTrack + 4000;
                 SuperJump = SuperJump + 1;
             }
             //The start cloud should 'despawn' (it just moves it far away so the player can't land on it)
@@ -134,7 +134,7 @@ public class PlayState extends State {
                     }
                 } else if (!clouds[i].hasPassed()
                         && koopa.getX() > clouds[i].getY() + Clouds.WIDTH) {
-                    Score++;
+                    
                     clouds[i].pass();
 
                 }
