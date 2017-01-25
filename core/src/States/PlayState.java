@@ -81,7 +81,7 @@ public class PlayState extends State {
             }
         }
         Font.draw(batch, "Score: " + Score, 12, koopa.getY() + 200);
-        Font.draw(batch, "SuperJumps: " + SuperJump, 12, koopa.getY() + 180);
+        Font.draw(batch, "SuperJumps: " + (int) SuperJump, 12, koopa.getY() + 180);
         Font.draw(batch, "Press P to pause.", getViewWidth() - 121, koopa.getY() + 200);
         batch.end();
     }
