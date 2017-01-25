@@ -111,7 +111,7 @@ public class PlayState extends State {
                 // end the game
                 // pop off the game screen to go to menu
                 StateManager GSM = getStateManager();
-                GSM.push(new EndState(GSM));
+                GSM.push(new EndState(GSM, Score, koopa.getX()));
 
             }
             // the score is the highest y pos the koopa reaches

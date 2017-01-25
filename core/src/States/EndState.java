@@ -24,18 +24,18 @@ public class EndState extends State {
     private Texture Cloud;
     
     private int HighScore;
-    private int Score;
+    private float Score;
     private BitmapFont Font;
     private KoopaBoi koopa;
     private Texture ground;
     private Texture Back;
 
-    public EndState(StateManager gsm) {
+    public EndState(StateManager gsm, float Score, float koopaX) {        
         super(gsm);
         GBG = new Texture("Background.jpg");
         ground = new Texture("ground.jpg");
         Back = new Texture ("back.jpg");
-        koopa = new KoopaBoi(300, FinalGame.LENGTH / 2);
+        koopa = new KoopaBoi((int) koopaX, FinalGame.LENGTH / 2);
         //Score = PlayState.getScore();
         setCameraView(FinalGame.WIDTH /2 , FinalGame.LENGTH /2 );
         setCameraPosition(getViewWidth() / 2, getViewHeight() / 2);
@@ -54,7 +54,7 @@ public class EndState extends State {
         batch.draw(Back, 250 - (Back.getWidth())/2, 30);
         // draw the koopa
         koopa.endRender(batch);
-        Font.draw(batch, "Score: " + Score, 12, koopa.getY() + 200);
+        Font.draw(batch, "Score: " + (int) Score, 12, koopa.getY() + 200);
         
         batch.end();
     }
