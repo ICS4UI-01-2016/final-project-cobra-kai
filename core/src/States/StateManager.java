@@ -47,5 +47,8 @@ public class StateManager {
     public void push(MenuState firstScreen) {
         states.push(firstScreen);
     }
+    public void push(EndState lastScreen){
+        states.push(lastScreen);
+    }
     
 }
