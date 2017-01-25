@@ -27,7 +27,7 @@ public class PlayState extends State {
     private Texture BG;
     private Texture ground;
     private Clouds[] clouds;
-    private float SuperJump = 0;
+    private float SuperJump = 1;
     private float ScoreTrack = 0;
     private float y;
     private float x;
