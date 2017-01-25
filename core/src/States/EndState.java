@@ -32,6 +32,7 @@ public class EndState extends State {
 
     public EndState(StateManager gsm, float Score, float koopaX) {        
         super(gsm);
+        this.Score = Score;
         GBG = new Texture("Background.jpg");
         ground = new Texture("ground.jpg");
         Back = new Texture ("back.jpg");
