@@ -33,9 +33,7 @@ public class PlayState extends State {
     private float x;
     private float getArrayX;
     private float getArrayY;
-    //All clouds are the same width, so this just gathers and saves that width value.
-    private float cloudWidth = clouds[0].getWidth();
-    private int Score;
+    public int Score;
     //Pause is 100. Pressing P multiplies 100 by -1, which triggers the Pause if statement that encoumpasses update. Prevents update from running until P is pressed again, essentially pausing the game.
     private float Pause = 100;
     private BitmapFont Font;
@@ -146,6 +144,8 @@ public class PlayState extends State {
             //This is a massive loop that resets the X and Y values of clouds once they are at a y value of 400 below the player(koopa).
             for (int i = 0; i < clouds.length - 1; i++) {
                 if (clouds[i].getY() <= koopa.getY() - 400) {
+                    //All clouds are the same width, so this just gathers and saves that width value.
+                    float cloudWidth = clouds[0].getWidth();
                     //Resets all clouds to normal (not broken).
                     clouds[i].setBroken(false);
                     //Becuase there is no i - 1 value for the first spot in the array, it has an exception here that replaces i - 1 with the second last place in the array 
@@ -231,6 +231,7 @@ public class PlayState extends State {
             Pause = Pause * -1;
         }
     }
+    
     public int getScore(){
         return Score;
     }
