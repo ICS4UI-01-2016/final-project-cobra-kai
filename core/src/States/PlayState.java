@@ -76,6 +76,7 @@ public class PlayState extends State {
 
     @Override
     public void update(float deltaTime) {
+        if(Pause == 100){
         //The start cloud should 'despawn' (it just moves it far away so the player can't land on it)
         if (koopa.getY() - 400 >= clouds[clouds.length - 1].getY()) {
             clouds[clouds.length - 1].setPos(1100, -1100);
@@ -86,17 +87,16 @@ public class PlayState extends State {
             clouds[i].update(deltaTime);
 
         }
-        while (Pause == -100) {
-            System.out.println("Kill yuorself");
-            if (Gdx.input.isKeyPressed(Input.Keys.L) == true) {
-                Pause = Pause * -1;
-            }
-        }
+
         if (koopa.getY() <= Score - 1000 || koopa.getY() <= 0) {
+            for (int i = 0; i < clouds.length; i++) {
+                
+            }
             // end the game
             StateManager gsm = getStateManager();
             // pop off the game screen to go to menu
             gsm.pop();
+        
         }
 
         if (koopa.getY() >= Score) {
@@ -181,6 +181,7 @@ public class PlayState extends State {
                 }
             }
         }
+    }
     }
 
     @Override
