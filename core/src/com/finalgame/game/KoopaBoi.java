@@ -63,7 +63,7 @@ public class KoopaBoi {
     }
 
     public void update(float deltaTime) {
-        // add gravity
+        // Add gravity
         if (position.y >= 0) {
             velocity.y += GRAVITY;
         } else {
@@ -81,7 +81,6 @@ public class KoopaBoi {
         if (position.x >= 470) {
             position.x = 5;
         }
-
         if (position.x <= 0) {
             position.x = 460;
         }
@@ -92,6 +91,7 @@ public class KoopaBoi {
         hitBox.setPosition(position.x, position.y);
     }
 
+    //There's a fun feature on the info page where the koopa can go left and right as a demonstration. InfoStateUpdate makes that possible.
     public void InfoStateUpdate(float deltaTime, float KoopaStart) {
         // scaling velocity by time
         velocity.scl(deltaTime);
@@ -99,7 +99,7 @@ public class KoopaBoi {
         position.add(velocity);
         // unscale velocity
         velocity.scl(1 / deltaTime);
-
+        //Keep the koopa contained to a n X value of 110 in either direction.
         if (position.x > KoopaStart + 110) {
             position.x = KoopaStart + 110;
         }

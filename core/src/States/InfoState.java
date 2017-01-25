@@ -91,7 +91,7 @@ public class InfoState extends State {
             if (touch.x > BackButtonX && touch.x < BackButtonX + Back.getWidth()
                     && touch.y > BackButtonY && touch.y < BackButtonY + Back.getHeight()) {
                 StateManager GSM = getStateManager();
-                GSM.push(new MenuState(GSM));
+                GSM.pop();
             }       
             float StartButtonX = getViewWidth() - (getViewWidth() / 12) - (Start.getWidth() / 2) - 50;
             float StartButtonY = getViewHeight() - 800;

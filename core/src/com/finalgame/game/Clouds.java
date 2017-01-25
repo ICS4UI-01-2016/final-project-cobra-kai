@@ -33,7 +33,7 @@ public class Clouds {
     private final float MOVEMENT1 = 0;
 
     public Clouds(float i) {
-        //This if exception generates a still cloud directly below the cloud's start position.
+        //This if exception generates a still cloud directly below the cloud's start position, it occupies the last position in the array.
         if (i == 10) {
             y = FinalGame.LENGTH / 4 - 30;
             x = FinalGame.WIDTH / 4;
@@ -43,6 +43,7 @@ public class Clouds {
         }
         position = new Vector3(x, y, 0);
         Cloud = new Texture("CloudBox.png");
+        //Broken cloud is a darker cloud that signifies if a cloud will break after one jump. 
         BrokenCloud = new Texture("BrokenCloudBox.png");
         velocity = new Vector3(MOVEMENT1, 0, 0);
 
