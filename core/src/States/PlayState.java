@@ -27,6 +27,8 @@ public class PlayState extends State {
     private Texture BG;
     private Texture ground;
     private Clouds[] clouds;
+    private float SuperJump = 0;
+    private float ScoreTrack = 0;
     private float y;
     private float x;
     private int Score;
@@ -71,12 +73,20 @@ public class PlayState extends State {
             }
         }
         Font.draw(batch, "Score: " + Score, 12, koopa.getY() + 200);
+        Font.draw(batch, "SuperJumps: " + SuperJump, 12, koopa.getY() + 180);
+        Font.draw(batch, "Press P to pause.", getViewWidth() - 121, koopa.getY() + 200);
         batch.end();
     }
 
     @Override
     public void update(float deltaTime) {
+        //Pause here will activte/deactivate as P is pressed. 
         if(Pause == 100){
+            //This little if statement gives you one SuperJump power - up every 1000 y coords.
+            if(Score >= ScoreTrack + 2000){
+                ScoreTrack = ScoreTrack + 2000;
+                SuperJump = SuperJump + 1;
+            }
         //The start cloud should 'despawn' (it just moves it far away so the player can't land on it)
         if (koopa.getY() - 400 >= clouds[clouds.length - 1].getY()) {
             clouds[clouds.length - 1].setPos(1100, -1100);
@@ -187,8 +197,10 @@ public class PlayState extends State {
     @Override
     public void handleInput() {
         if (Gdx.input.isKeyJustPressed(Input.Keys.UP) == true) {
+            if(SuperJump > 0){
             koopa.jump();
-
+            SuperJump = SuperJump - 1;
+            }
         }
         if (Gdx.input.isKeyPressed(Input.Keys.RIGHT) == true) {
 
@@ -201,7 +213,7 @@ public class PlayState extends State {
 
             koopa.moveLeft();
         }
-        if (Gdx.input.isKeyPressed(Input.Keys.P) == true) {
+        if (Gdx.input.isKeyJustPressed(Input.Keys.P) == true) {
             Pause = Pause * -1;
         }
     }

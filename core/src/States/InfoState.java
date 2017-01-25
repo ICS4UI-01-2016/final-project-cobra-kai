@@ -21,6 +21,7 @@ public class InfoState extends State {
 
     private Texture GBG;
     private Texture GeneralInfo;
+    private Texture SuperJumpInfo;
     private Texture UnstableCIns;
     private Texture BrokenCloud;
     private Texture StableCIns;
@@ -36,6 +37,7 @@ public class InfoState extends State {
         super(ifs);
         GBG = new Texture("Background.jpg");
         GeneralInfo = new Texture("GeneralInfo.jpg");
+        SuperJumpInfo = new Texture("SuperJumpInfo.jpg");
         UnstableCIns = new Texture("UnstableClouds.jpg");
         BrokenCloud = new Texture("BrokenCloudBox.png");
         StableCIns = new Texture("StableClouds.jpg");
@@ -47,7 +49,7 @@ public class InfoState extends State {
 
         setCameraView(FinalGame.WIDTH, FinalGame.LENGTH);
         setCameraPosition(getViewWidth() / 2, getViewHeight() / 2);
-        koopa = new KoopaBoi(715, 265);
+        koopa = new KoopaBoi(715, 365);
     }
 
     @Override
@@ -57,10 +59,11 @@ public class InfoState extends State {
         batch.draw(GBG, 0, 0, getViewWidth(), getViewHeight());
         batch.draw(StableCIns, getViewWidth() / 4 - StableCIns.getWidth() / 2, getViewHeight() - 200);
         batch.draw(Cloud, getViewWidth() / 2 - Cloud.getWidth() + StableCIns.getWidth() / 2 + 100, (getViewHeight() - 200) + ((StableCIns.getHeight() - Cloud.getHeight()) / 2));
-        batch.draw(UnstableCIns, getViewWidth() / 4 - UnstableCIns.getWidth() / 2, getViewHeight() - 400);
-        batch.draw(BrokenCloud, getViewWidth() / 2 - BrokenCloud.getWidth() + UnstableCIns.getWidth() / 2 + 100, (getViewHeight() - 400) + ((UnstableCIns.getHeight() - BrokenCloud.getHeight()) / 2));
-        batch.draw(CharacterInfo, getViewWidth() / 4 - CharacterInfo.getWidth() / 2, getViewHeight() - 600);
+        batch.draw(UnstableCIns, getViewWidth() / 4 - UnstableCIns.getWidth() / 2, getViewHeight() - 350);
+        batch.draw(BrokenCloud, getViewWidth() / 2 - BrokenCloud.getWidth() + UnstableCIns.getWidth() / 2 + 100, (getViewHeight() - 350) + ((UnstableCIns.getHeight() - BrokenCloud.getHeight()) / 2));
+        batch.draw(CharacterInfo, getViewWidth() / 4 - CharacterInfo.getWidth() / 2, getViewHeight() - 500);
         koopa.render(batch);
+        batch.draw(SuperJumpInfo, getViewWidth() / 2 - (SuperJumpInfo.getWidth() / 2), getViewHeight() - 650);
         batch.draw(GeneralInfo, getViewWidth() / 2 - (GeneralInfo.getWidth() / 2), getViewHeight() - 800);
         batch.draw(Back, getViewWidth() / 12 - 30, getViewHeight() - 800);
         batch.draw(Start, getViewWidth() - (getViewWidth() / 12) - (Start.getWidth() / 2) - 50, getViewHeight() - 800);
