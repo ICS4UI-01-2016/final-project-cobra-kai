@@ -60,7 +60,7 @@ public class PlayState extends State {
     public void render(SpriteBatch batch) {
         batch.setProjectionMatrix(getCombinedCamera());
         batch.begin();
-        batch.draw(GBG, 0, koopa.getY() - 212, getViewWidth(), getViewHeight());
+        batch.draw(BG, 0, koopa.getY() - 212, getViewWidth(), getViewHeight());
         koopa.render(batch);
         for (int i = 0; i < clouds.length; i++) {
             if (clouds[i].isBroken() == false) {
