@@ -24,8 +24,6 @@ public class PlayState extends State {
 
     private KoopaBoi koopa;
     private Texture GBG;
-    private Texture BG;
-    private Texture ground;
     private Clouds[] clouds;
     private float SuperJump = 1;
     private float ScoreTrack = 0;
@@ -50,7 +48,6 @@ public class PlayState extends State {
         // create a new koopa in the center of the screen
         koopa = new KoopaBoi(FinalGame.WIDTH / 4, FinalGame.LENGTH / 4);
 
-        BG = new Texture("bg.jpg");
         GBG = new Texture("Background.jpg");
         // have the camera follow the koopa's y position
         moveCameraY(koopa.getY());
@@ -110,9 +107,8 @@ public class PlayState extends State {
             }
 
             if (koopa.getY() <= Score - 1000 || koopa.getY() <= 0) {
-                
+
                 // end the game
-                
                 // pop off the game screen to go to menu
                 StateManager GSM = getStateManager();
                 GSM.push(new EndState(GSM));
@@ -126,13 +122,14 @@ public class PlayState extends State {
             for (int i = 0; i < clouds.length; i++) {
                 if (clouds[i].collides(koopa)) {
                     //Find current highscore
-                    Preferences Pref = Gdx.app.getPreferences("HighScore");
-                    int HighScore = Pref.getInteger("HighScore", 0);
+                    Preferences pref = Gdx.app.getPreferences("HighScore");
+                    int HighScore = pref.getInteger("HighScore", 0);
                     //Is the current score higher?
                     if (Score > HighScore) {
-                        Pref.putInteger("HighScore", Score);
+                        pref.putInteger("HighScore", Score);
                         //Save the new highscore.
-                        Pref.flush();
+                        pref.flush();
+                        
                     }
                 } else if (!clouds[i].hasPassed()
                         && koopa.getX() > clouds[i].getY() + Clouds.WIDTH) {
@@ -190,7 +187,7 @@ public class PlayState extends State {
                 }
             }
             //This for loop detects when the koopa is FALLING down onto a cloud, and if it is it will automatically propell it's jump.
-            
+
             for (int i = 0; i < clouds.length; i++) {
                 if (clouds[i].getY() <= koopa.getY()) {
                     //This specific line makes it so that the koopa isn't simply propelled when it touches a cloud, it has to fall back onto the cloud.
@@ -231,8 +228,8 @@ public class PlayState extends State {
             Pause = Pause * -1;
         }
     }
-    
-    public int getScore(){
+
+    public int getScore() {
         return Score;
     }
 
