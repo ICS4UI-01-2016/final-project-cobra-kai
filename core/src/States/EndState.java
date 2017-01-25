@@ -87,6 +87,7 @@ public class EndState extends State {
     public void dispose() {
         Cloud.dispose();
         Back.dispose();
+        ground.dispose();
     }
 
 }
