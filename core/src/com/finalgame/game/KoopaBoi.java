@@ -4,7 +4,8 @@
  */
 package com.finalgame.game;
 
-import States.PlayState;
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
@@ -46,6 +47,7 @@ public class KoopaBoi {
     public void jump() {
         velocity.y = 530;
     }
+    
     public void superJump(){
         velocity.y = 800;
     }
@@ -135,16 +137,31 @@ public class KoopaBoi {
 
     public void render(SpriteBatch batch) {
         // if the koopa is moving right (+ velocity) or not moving
-        if (velocity.x == 0 || velocity.x >= 220) {
+        if (Gdx.input.isKeyPressed(Input.Keys.RIGHT) == true && velocity.y < 400 && Gdx.input.isKeyPressed(Input.Keys.UP) == false && Gdx.input.isKeyPressed(Input.Keys.LEFT) == false) {
+            batch.draw(start, position.x, position.y);
+        }
+        // if all buttons are pressed
+        if (Gdx.input.isKeyPressed(Input.Keys.RIGHT) == true && (Gdx.input.isKeyPressed(Input.Keys.LEFT)) == true || Gdx.input.isKeyJustPressed(Input.Keys.UP) == true && (Gdx.input.isKeyPressed(Input.Keys.LEFT))){
+            batch.draw(left, position.x, position.y);
+        }
+        //start position (not pressing any buttons)
+        if (Gdx.input.isKeyPressed(Input.Keys.UP) == true && velocity.y < 400 && Gdx.input.isKeyPressed(Input.Keys.LEFT) == false|| Gdx.input.isKeyPressed(Input.Keys.LEFT) == false && Gdx.input.isKeyPressed(Input.Keys.RIGHT) == false && velocity.y < 400){
             batch.draw(start, position.x, position.y);
         }
         if (position.y <= 0) {
-            start.dispose();
+            //start.dispose();
             batch.draw(death, position.x, position.y);
+            //          start.dispose();
         }
         // if the koopa is moving left (- velocity)
-        if (velocity.x <= -220) {
+        if (Gdx.input.isKeyPressed(Input.Keys.LEFT) == true && velocity.y < 400) {
             batch.draw(left, position.x, position.y);
+        }
+        //render jumping for super jump
+        if ((Gdx.input.isKeyPressed(Input.Keys.UP) == true) && (400 <= velocity.y) || (400 <= velocity.y)){
+            //start.dispose();
+            batch.draw(jump, position.x - 30, position.y);
+            //start.dispose();
         }
 
     }
